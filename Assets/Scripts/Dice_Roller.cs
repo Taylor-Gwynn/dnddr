@@ -47,10 +47,6 @@ public class Dice_Roller : MonoBehaviour
             displayNum = Random.Range(1, 20);
             lastRollTime = Time.time;
         }
-
-        // Debug.Log("Time: " + Time.time);
-        // Debug.Log("start + roll: " + (rollStartTime + _rollTime));
-        // Debug.Log("Time.time - lastRollTime" + (Time.time - lastRollTime));
     }
     
     public int GetResult()
