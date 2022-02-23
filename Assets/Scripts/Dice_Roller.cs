@@ -38,7 +38,7 @@ public class Dice_Roller : MonoBehaviour
     {
         if (Time.time >= rollStartTime + _rollTime)
         {
-            result = Random.Range(1, 20);
+            result = Random.Range(1, 21);
             displayNum = result;
             rollStarted = false;
         }
