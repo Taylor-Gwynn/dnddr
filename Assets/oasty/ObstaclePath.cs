@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Bim;
@@ -13,6 +14,19 @@ public class ObstaclePath : MonoBehaviour
                                 //once the current obstacle is completed (pass or fail), it is popped.
     public Player player;
     public GlobalTimer timer; //reference to the object tracking the time, in "beats"
+
+    //returns the ChoiceType of the upcoming obstacle
+    public ChoiceType GetCurrChoice()
+    {
+        throw new NotImplementedException();
+    }
+
+    // returns the point value of a correct input at the current timing
+    public int GetScore()
+    {
+        throw new NotImplementedException();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
