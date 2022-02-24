@@ -5,14 +5,31 @@ namespace Bim
 {
     public class Obstacle : MonoBehaviour
     {
-        
-        
+        [Header("Obstacle Settings")]
+        [Tooltip("The scriptable object that dictates how the player interacts with the obstacle.")]
+        public ObstacleType _Type;
+
         // invoked when the object should be returned to its pool
         protected internal readonly UnityEvent<Obstacle> Recycle = new UnityEvent<Obstacle>(); 
 
         private void ReturnObstacle()
         {
             Recycle.Invoke(this);
+        }
+
+        public void PlayFail()
+        {
+            
+        }
+
+        public void PlaySuccess()
+        {
+            
+        }
+
+        public ObstacleType GetObstacleType()
+        {
+            return _Type;
         }
         
         /// <summary>
