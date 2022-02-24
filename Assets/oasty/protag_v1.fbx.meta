@@ -24,6 +24,9 @@ ModelImporter:
   - first:
       74: 3521314245822496147
     second: protag_skel|lookingDown (1)
+  - first:
+      74: 7238776151542159867
+    second: protag_skel|angery
   externalObjects: {}
   materials:
     materialImportMode: 2
