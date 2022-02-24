@@ -31,9 +31,11 @@ public class GlobalTimer : MonoBehaviour
         if (beatTimer < 0){
             beat++;
             beatTimer = beatTimerDefault;
+            SendBeat();
             if (beat <= TIME_SIGNATURE){
                 bar++;
                 beat = 0;
+                SendBar();
                 
             }
         }
