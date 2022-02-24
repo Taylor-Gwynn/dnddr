@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,8 +11,9 @@ namespace Bim
     public class PoolingManager : MonoBehaviour
     {
         public int _PoolSize;
+        
         public GameObject _ObjectPrefab;
-
+        
         private readonly List<Obstacle> _pool = new List<Obstacle>();
 
         private void MakeObject()
