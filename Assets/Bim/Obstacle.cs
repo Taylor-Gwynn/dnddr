@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 namespace Bim
 {
-    public class Obstacle : MonoBehaviour
+    public class Obstacle : BeatMover
     {
         [Header("Obstacle Settings")]
         [Tooltip("The scriptable object that dictates how the player interacts with the obstacle.")]
