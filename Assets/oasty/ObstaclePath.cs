@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Bim;
 using UnityEngine;
 
 // The class that stores obstacles, moves the player along them, 
