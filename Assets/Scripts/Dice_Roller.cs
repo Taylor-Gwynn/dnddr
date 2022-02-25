@@ -30,12 +30,12 @@ public class Dice_Roller : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown("r") & !rollStarted)
-        {
-            rollStartTime = Time.time;
-            rollStarted = true;
-            lastRollTime = Time.time;
-        }
+        // if (Input.GetKeyDown("r") & !rollStarted)
+        // {
+        //     rollStartTime = Time.time;
+        //     rollStarted = true;
+        //     lastRollTime = Time.time;
+        // }
 
         if (rollStarted)
         {
@@ -76,7 +76,7 @@ public class Dice_Roller : MonoBehaviour
         //UV offset y = -0.0259  : 1
         //UV offset y = -0.496  : 20
         float offset = (-(0.496f-0.0259f)/19)*((dieNumber));
-        Debug.Log("offset: "+offset);
+        // Debug.Log("offset: "+offset);
         return offset;
     }
 

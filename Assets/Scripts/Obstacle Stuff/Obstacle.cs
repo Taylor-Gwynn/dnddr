@@ -51,7 +51,6 @@ namespace Bim
             animator.runtimeAnimatorController = _Type._AnimOverride;
             animator.SetBool("successParam", true);
             animator.SetTrigger("EnteringInteraction");
-            Debug.Log("aa");
         }
     }
 }
