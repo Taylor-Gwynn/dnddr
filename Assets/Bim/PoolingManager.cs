@@ -119,7 +119,7 @@ namespace Bim
         {
             if (_pools.ContainsKey(obj._Type)) return;
             
-            Debug.Log("Adding new object type to dict keys: " + obj._Type);
+            // Debug.Log("Adding new object type to dict keys: " + obj._Type);
             _pools.Add(obj._Type, new List<Obstacle>());
             _obstacleIndexList.Add(obj._Type);
         }

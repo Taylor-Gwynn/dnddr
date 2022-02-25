@@ -46,24 +46,24 @@ public class GlobalTimer : MonoBehaviour
     }
 
     void SendBeat(){
-        Debug.Log("Beat: " + beat);
+        // Debug.Log("Beat: " + beat);
         foreach (BeatMover x in listeners){
             x.OnBeat();
         }
     }
     void SendBar(){
-        Debug.Log("Bar:  " + bar);
+        // Debug.Log("Bar:  " + bar);
         foreach (BeatMover x in listeners){
             x.OnBar();
         }
     }
 
-    int GetBeat()
+    public int GetBeat()
     {
         return beat;
     }
 
-    int GetBar()
+    public int GetBar()
     {
         return bar;
     }

@@ -182,20 +182,6 @@ MonoBehaviour:
   health: 0
   score: 0
   animator: {fileID: 0}
---- !u!114 &81862974
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 81862969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8af26f74dcd26b944a8c63753a53a7ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  timer: {fileID: 0}
 --- !u!1 &137178373
 GameObject:
   m_ObjectHideFlags: 0
@@ -241,10 +227,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab4412cc197c9a84199580207d741aee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BPM: 60
-  TIME_SIGNATURE: 4
-  beatTimer: 0
   listeners: []
+  BPM: 120
+  TIME_SIGNATURE: 4
 --- !u!4 &152412492
 Transform:
   m_ObjectHideFlags: 0
@@ -257,7 +242,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &240401014
 GameObject:
@@ -305,6 +290,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 81862973}
   timer: {fileID: 152412491}
+  Pooler: {fileID: 1098855336}
+  SpawnBeat: 4
+  SpawnBar: 2
+  ObstacleSpawnDistance: 15
 --- !u!1 &241163335
 GameObject:
   m_ObjectHideFlags: 0
@@ -448,7 +437,7 @@ Transform:
   m_Children:
   - {fileID: 1035310139}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &574399356
 MonoBehaviour:
