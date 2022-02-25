@@ -7,16 +7,22 @@ using UnityEngine;
 //      initiates inputs and health/scoring calculations.
 public class Player : MonoBehaviour
 {
-    // public List<AnimationClip> animList;
+    public AnimationClip[] succAnimClips;
+    public AnimationClip[] failAnimClips;
     public ObstaclePath obstaclePath;
     public ChoiceType currAction;
     public int health;
     public int score;
     public Animator animator;
+    public AnimatorOverrideController animOverride;
     // Start is called before the first frame update
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
+        animOverride = new AnimatorOverrideController(animator.runtimeAnimatorController);
+        // clipOverrides = new AnimationClipOverrides(animatorOverrideController.overridesCount);
+        // animatorOverrideController.GetOverrides(clipOverrides);
+        animator.runtimeAnimatorController = animOverride;
     }
 
     // Update is called once per frame
@@ -29,15 +35,35 @@ public class Player : MonoBehaviour
     public bool StartChoice(ChoiceType choice){
         bool success = false;
         int points = 0;
+        // string currAnim;
+        Bim.ObstacleType obstacle = obstaclePath.GetCurrObstacleType();
         currAction = choice;
-        if (obstaclePath.GetCurrChoice() == choice){
-            success = true;
-            points += obstaclePath.GetScore();
-        }
+        // if (obstacle._ChoiceType == choice){
+        //     success = true;
+        //     currAnim = obstacle._PlayerSuccessSuccess.ToString();
+        //     points = obstaclePath.GetScore();
+        // }else{
+        //     success = false;
+        //     currAnim = obstacle._PlayerSuccessFail.ToString();
+        //     points = 0;
+        // }
+        success = obstacle._ChoiceType == choice;
+        animator.SetBool("successParam", success);
+        AnimationClip currWindupAnim = obstacle._PlayerSuccessClips[0]; //assumes "windup" animation is first in the obstacle's list of player animations
+        animOverride["emptyWindup"] = currWindupAnim;
+
         score += points;
         DisplayScoreQuality(points);
+        UpdateHealth(points);
+        // animator.SetTrigger(currAnim);
+        // animator.SetInteger("obstacle", (int)obstaclePath.GetCurrObstacleID());
 
         return success;
+    }
+
+    //damages or increases health based on score and combo(?)
+    private void UpdateHealth(int score){
+        throw new NotImplementedException();
     }
 
     // draws "good", "great", "perfect" or "miss" icon near player
@@ -45,4 +71,9 @@ public class Player : MonoBehaviour
     {
         throw new NotImplementedException();
     }
+
+    private void OnBeat(){
+        //cycles through next animation to put in override...
+    }
+
 }

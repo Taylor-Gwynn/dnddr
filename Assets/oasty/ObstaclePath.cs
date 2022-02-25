@@ -15,13 +15,13 @@ public class ObstaclePath : MonoBehaviour
     public Player player;
     public GlobalTimer timer; //reference to the object tracking the time, in "beats"
 
-    //returns the ChoiceType of the upcoming obstacle
-    public ChoiceType GetCurrChoice()
+    //returns the upcoming ObstacleType
+    public ObstacleType GetCurrObstacleType()
     {
         throw new NotImplementedException();
     }
 
-    // returns the point value of a correct input at the current timing
+    // returns the point value of a correct input at the current timing (ie right now)
     public int GetScore()
     {
         throw new NotImplementedException();
