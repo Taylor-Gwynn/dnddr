@@ -16,3 +16,4 @@ MonoBehaviour:
   _PlayerSuccessSuccess: 0
   _PlayerSuccessFail: 0
   _PlayerAnimOverride: {fileID: 22100000, guid: dbcf227523d6f894c8116c72c58d3040, type: 2}
+  _AnimOverride: {fileID: 22100000, guid: 56913cd367eb1cd45b848ae8123be725, type: 2}

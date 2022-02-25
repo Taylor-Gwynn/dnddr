@@ -7,20 +7,20 @@ using UnityEngine;
 //      initiates inputs and health/scoring calculations.
 public class Player : BeatMover
 {
-    public AnimationClip[] succAnimClips;
-    public AnimationClip[] failAnimClips;
+    // public AnimationClip[] succAnimClips;
+    // public AnimationClip[] failAnimClips;
     private ObstaclePath obstaclePath;
     public ChoiceType currAction;
     public int health;
     public int score;
-    private Animator animator;
-    public AnimatorOverrideController TestAnimOverride;
+    // private Animator animator;
+    // public AnimatorOverrideController TestAnimOverride;
     // Start is called before the first frame update
     new void Start()
     {
         base.Start();
         obstaclePath = FindObjectOfType<ObstaclePath>();
-        animator = GetComponent<Animator>();
+        
         // animator.runtimeAnimatorController = TestAnimOverride;
     }
 
@@ -32,6 +32,7 @@ public class Player : BeatMover
             StartChoice(ChoiceType.Dex);
             animator.SetBool("successParam", true);
             animator.SetTrigger("EnteringInteraction");
+            obstaclePath.GetCurrObstacle().Interact(true);
             // animator.runtimeAnimatorController = TestAnimOverride2;
             // AnimationClip currWindupAnim = succAnimClips[0]; //assumes "windup" animation is first in the obstacle's list of player animations
             // animOverride["emptyWindupSucc"] = currWindupAnim;
@@ -46,7 +47,7 @@ public class Player : BeatMover
         bool isSuccess = false;
         int points = 0;
         
-        Bim.ObstacleType obstacle = obstaclePath.GetCurrObstacleType();
+        Bim.ObstacleType obstacle = obstaclePath.GetCurrObstacle().GetObstacleType();
     if (obstacle == null){Debug.Log("Did not pull an obstacle from ObstaclePath!");}
         currAction = choice;
         isSuccess = obstacle._ChoiceType == choice;
@@ -62,13 +63,13 @@ public class Player : BeatMover
 
     //damages or increases health based on score and combo(?)
     private void UpdateHealth(int score){
-        throw new NotImplementedException();
+        // throw new NotImplementedException();
     }
 
     // draws "good", "great", "perfect" or "miss" icon near player
     private void DisplayScoreQuality(int points)
     {
-        throw new NotImplementedException();
+        // throw new NotImplementedException();
     }
 
     public override void OnBeat(){
@@ -82,4 +83,3 @@ public class Player : BeatMover
     }
 
 }
-//  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20

@@ -45,5 +45,13 @@ namespace Bim
         {
             transform.position = position;
         }
+
+        //
+        public void Interact(bool isSuccess){
+            animator.runtimeAnimatorController = _Type._AnimOverride;
+            animator.SetBool("successParam", true);
+            animator.SetTrigger("EnteringInteraction");
+            Debug.Log("aa");
+        }
     }
 }
