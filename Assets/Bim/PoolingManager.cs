@@ -44,19 +44,9 @@ namespace Bim
         /// <summary>
         /// Makes a random obstacle, if assigned obstacles.
         /// </summary>
-        public void MakeObstacle()
+        private void MakeObstacle()
         {
             int index = Random.Range(0, _ObstaclePrefabs.Count);
-            MakeObstacle(index);
-        }
-
-        /// <summary>
-        /// Make an obstacle of a specific type
-        /// </summary>
-        /// <param name="type"></param>
-        public void MakeObstacle(ObstacleType type)
-        {
-            int index = _obstacleIndexList.IndexOf(type);
             MakeObstacle(index);
         }
 
@@ -64,7 +54,7 @@ namespace Bim
         /// Makes a specific obstacle, check the pools list for reference
         /// </summary>
         /// <param name="index"></param>
-        public void MakeObstacle(int index)
+        private void MakeObstacle(int index)
         {
             if ( _ObstaclePrefabs[index] == null) Debug.LogError("Make object failed, please provide a valid obstacle index.");
             
