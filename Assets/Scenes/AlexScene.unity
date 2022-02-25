@@ -295,7 +295,7 @@ MonoBehaviour:
   SpawnBeat: 4
   SpawnBar: 2
   ObstacleSpawnDistance: 15
-  ObstacleDespawnDistance: 15
+  ObstacleDespawnDistance: 30
 --- !u!1 &241163335
 GameObject:
   m_ObjectHideFlags: 0
