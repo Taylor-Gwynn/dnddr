@@ -4,19 +4,22 @@ using UnityEngine;
 
 public class GlobalTimer : MonoBehaviour
 {
-    public int BPM = 120;
-    public int TIME_SIGNATURE = 4; //beats per measure
-    private int beatTimerDefault;
-    public int beat; //value from 0 to 3 indicating how far along the "bar" we are
-    public int bar; // increasing value indication how many measures from the start we are
-    public float beatTimer; //decreasing value to the next "beat"
     public List<BeatMover> listeners;
+    public int BPM;                     // Beats per minute
+    public int TIME_SIGNATURE;          // Beats per bar
+    
+    private float beatTimerDefault;     // Length of time of a beat
+    private int beat;                   // Value from 1 to TIME_SIGNATURE indicating how far along the bar we are
+    private int bar;                    // The bar we're current in (starting at 1)
+    private float beatTimer;            // Time until the next beat
 
     // Start is called before the first frame update
     void Start()
     {
+        beatTimerDefault = 60f / BPM;
         beatTimer = beatTimerDefault;
-        beatTimerDefault = 60/BPM;
+        beat = 1;
+        bar = 1;
     }
 
     // Update is called once per frame
@@ -28,27 +31,40 @@ public class GlobalTimer : MonoBehaviour
     // increments timers/beats based on Time.deltaTime
     void BeatTick(){
         beatTimer -= Time.deltaTime;
+        // We have reached a new beat
         if (beatTimer < 0){
+            SendBeat();
             beat++;
             beatTimer = beatTimerDefault;
-            SendBeat();
-            if (beat <= TIME_SIGNATURE){
+            // We have reached a new bar
+            if (beat > TIME_SIGNATURE){
                 bar++;
-                beat = 0;
+                beat = 1;
                 SendBar();
-                
             }
         }
     }
 
     void SendBeat(){
+        // Debug.Log("Beat: " + beat);
         foreach (BeatMover x in listeners){
             x.OnBeat();
         }
     }
     void SendBar(){
+        // Debug.Log("Bar:  " + bar);
         foreach (BeatMover x in listeners){
             x.OnBar();
         }
+    }
+
+    public int GetBeat()
+    {
+        return beat;
+    }
+
+    public int GetBar()
+    {
+        return bar;
     }
 }

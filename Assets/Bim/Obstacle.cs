@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 namespace Bim
 {
-    public class Obstacle : MonoBehaviour
+    public class Obstacle : BeatMover
     {
         [Header("Obstacle Settings")]
         [Tooltip("The scriptable object that dictates how the player interacts with the obstacle.")]
@@ -12,7 +12,7 @@ namespace Bim
         // invoked when the object should be returned to its pool
         protected internal readonly UnityEvent<Obstacle> Recycle = new UnityEvent<Obstacle>(); 
 
-        private void ReturnObstacle()
+        public void ReturnObstacle()
         {
             Recycle.Invoke(this);
         }
