@@ -12,7 +12,7 @@ namespace Bim
         // invoked when the object should be returned to its pool
         protected internal readonly UnityEvent<Obstacle> Recycle = new UnityEvent<Obstacle>(); 
 
-        private void ReturnObstacle()
+        public void ReturnObstacle()
         {
             Recycle.Invoke(this);
         }
