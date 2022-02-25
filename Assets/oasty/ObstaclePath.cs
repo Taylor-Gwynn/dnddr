@@ -8,10 +8,9 @@ using UnityEngine;
 //   and performs the appropriate animations
 public class ObstaclePath : MonoBehaviour
 {
-    // stores upcoming obstacles.
-    // index 0 is "current", takes 4 metronome "beats" to complete,
-    // and index 1 is 4 "beats" away (must walk there)
-    // once the current obstacle is completed (pass or fail), it is popped.
+    // upcomingObstacles stores all the obstacles in front of the player
+    // Once they've been interacted with, they're moved to completedObstacles
+    // completedObstacles that are off-screen are despawned
     public Queue<Obstacle> upcomingObstacles = new Queue<Obstacle>();
     public List<Obstacle> completedObstacles = new List<Obstacle>();
                                 
@@ -54,7 +53,7 @@ public class ObstaclePath : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Logic for determining whether or not to spawn an obstacle
+        // Logic for determining whether or not to spawn an obstacle each frame
         if (timer.GetBar() == nextSpawnBar & timer.GetBeat() == SpawnBeat)
         {
             DespawnObstacles();
@@ -75,16 +74,19 @@ public class ObstaclePath : MonoBehaviour
 
     void DespawnObstacles()
     {
-        foreach (Obstacle obs in completedObstacles)
+        for (int i = 0; i < completedObstacles.Count; i++)
         {
-            if (player.transform.position.z - obs.transform.position.z >= ObstacleDespawnDistance)
+            if (player.transform.position.z - completedObstacles[i].transform.position.z >= ObstacleDespawnDistance)
             {
-                obs.ReturnObstacle();
+                completedObstacles[i].ReturnObstacle();
+                completedObstacles.RemoveAt(i);
+                i--;
             }
         }
     }
 
     // Testing method for moving obstacles from upcoming to completed
+    // Now that I think about it we can probably keep this since the player will always pass objects they've interacted with
     void TempInteractWithObstacles()
     {
         if (upcomingObstacles.Count == 0) return;

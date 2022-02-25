@@ -16,7 +16,6 @@ public class GlobalTimer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        beatTimerDefault = 60f / BPM;
         beatTimer = beatTimerDefault;
         beat = 1;
         bar = 1;
@@ -25,6 +24,8 @@ public class GlobalTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // This is in Update so we can change it to increase difficulty
+        beatTimerDefault = 60f / BPM;
         BeatTick();
     }
 
