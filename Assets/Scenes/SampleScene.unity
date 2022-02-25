@@ -177,10 +177,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a49561acc626c1342b3b2a4959f0a31b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animList: []
+  obstaclePath: {fileID: 0}
   currAction: 0
   health: 0
   score: 0
+  animator: {fileID: 0}
 --- !u!114 &81862974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,7 +211,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &152412490
 GameObject:
   m_ObjectHideFlags: 0
@@ -418,7 +419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePrefabs:
-  - {fileID: 7232484288541372013, guid: 6df104f2baf568b47934e8b132abc77f, type: 3}
+  - {fileID: 2765592485540840773, guid: 6df104f2baf568b47934e8b132abc77f, type: 3}
   playerTransform: {fileID: 1603779040}
 --- !u!1 &705507993
 GameObject:
