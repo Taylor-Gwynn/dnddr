@@ -7,6 +7,16 @@ public enum ChoiceType
     Con
 }
 
+//a unique identifier for each obstacle (for identifying animations)
+public enum ObstacleID
+{
+    Mountain,
+    Enemy,
+    Girl,
+    Door,
+    Ballista
+}
+
 public enum PlayerSuccessAnimations
 {
     Attack,

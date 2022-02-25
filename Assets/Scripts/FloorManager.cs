@@ -24,7 +24,7 @@ public class FloorManager : MonoBehaviour
         
         // Starting position of the tiles
         spawnX = playerTransform.position.x;
-        spawnY = playerTransform.position.y - 0.2f;
+        spawnY = playerTransform.position.y - 0.1f;
         spawnZ = playerTransform.position.z - tileLength * 7;
         
         // Spawn Starting tiles

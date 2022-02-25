@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d54dbc7ed921de24ba338e05416a7692, type: 3}
+  m_Name: Mountain
+  m_EditorClassIdentifier: 
+  _ChoiceType: 0
+  _PlayerSuccessSuccess: 3
+  _PlayerSuccessFail: 3
+  _PlayerSuccessClips:
+  - {fileID: 6013492804859811476, guid: cc585badf091db54d8542eedc1d5a27a, type: 3}
+  - {fileID: 7382571628764806917, guid: cc585badf091db54d8542eedc1d5a27a, type: 3}
+  - {fileID: -9126768871606662290, guid: 17af0f083a395db4bab9c47c38c73165, type: 3}
+  _PlayerFailClips: []

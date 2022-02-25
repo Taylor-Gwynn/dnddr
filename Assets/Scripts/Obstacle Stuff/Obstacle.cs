@@ -12,7 +12,7 @@ namespace Bim
         // invoked when the object should be returned to its pool
         protected internal readonly UnityEvent<Obstacle> Recycle = new UnityEvent<Obstacle>(); 
 
-        private void ReturnObstacle()
+        public void ReturnObstacle()
         {
             Recycle.Invoke(this);
         }
@@ -32,6 +32,12 @@ namespace Bim
             return _Type;
         }
         
+        public override void OnBeat(){
+
+        }
+        public override void OnBar(){
+            
+        }
         /// <summary>
         /// Used to set the location of the Obstacle
         /// </summary>
