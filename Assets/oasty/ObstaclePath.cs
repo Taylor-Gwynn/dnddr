@@ -8,11 +8,13 @@ using UnityEngine;
 //   and performs the appropriate animations
 public class ObstaclePath : MonoBehaviour
 {
-    public Queue<Obstacle> obstacles; //stores upcoming obstacles.
-                                // index 0 is "current", takes 4 metronome "beats" to complete,
-                                // and index 1 is 4 "beats" away (must walk there)
-                                //once the current obstacle is completed (pass or fail), it is popped.
-    
+    // stores upcoming obstacles.
+    // index 0 is "current", takes 4 metronome "beats" to complete,
+    // and index 1 is 4 "beats" away (must walk there)
+    // once the current obstacle is completed (pass or fail), it is popped.
+    public Queue<Obstacle> upcomingObstacles = new Queue<Obstacle>();
+    public List<Obstacle> completedObstacles = new List<Obstacle>();
+                                
     public Player player;
     // public GameObject GlobalTimerObject;   //reference to the object tracking the time, in "beats"
     public GlobalTimer timer;
@@ -22,7 +24,8 @@ public class ObstaclePath : MonoBehaviour
     public int SpawnBar;            // Bar to spawn an obstacle on (1 = every bar, 2 = every other bar..)
     private int nextSpawnBar;       // When the next obstacle is going to be spawned
 
-    public int ObstacleSpawnDistance;       // Distance from player where obstacles are spawned
+    public int ObstacleSpawnDistance;       // Distance from player (forwards) where obstacles are spawned
+    public int ObstacleDespawnDistance;     // Distance from player (backwards) where obstacles are added back to the pool
     
     //returns the ChoiceType of the upcoming obstacle
     public ChoiceType GetCurrChoice()
@@ -39,7 +42,6 @@ public class ObstaclePath : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // timer = GlobalTimerObject.GetComponent<GlobalTimer>();
         nextSpawnBar = SpawnBar;
     }
 
@@ -49,14 +51,41 @@ public class ObstaclePath : MonoBehaviour
         // Logic for determining whether or not to spawn an obstacle
         if (timer.GetBar() == nextSpawnBar & timer.GetBeat() == SpawnBeat)
         {
+            DespawnObstacles();
             SpawnObstacle();
             nextSpawnBar += SpawnBar;
         }
+        
+        // Testing Method
+        TempInteractWithObstacles();
     }
 
     void SpawnObstacle()
     {
         Obstacle obs = Pooler.GetObstacle();
         obs.transform.position = player.transform.position + new Vector3(0, 0, ObstacleSpawnDistance);
+        upcomingObstacles.Enqueue(obs);
+    }
+
+    void DespawnObstacles()
+    {
+        foreach (Obstacle obs in completedObstacles)
+        {
+            if (player.transform.position.z - obs.transform.position.z >= ObstacleDespawnDistance)
+            {
+                obs.ReturnObstacle();
+            }
+        }
+    }
+
+    // Testing method for moving obstacles from upcoming to completed
+    void TempInteractWithObstacles()
+    {
+        if (upcomingObstacles.Count == 0) return;
+        
+        if (upcomingObstacles.Peek().transform.position.z < player.transform.position.z)
+        {
+            completedObstacles.Add(upcomingObstacles.Dequeue());
+        }
     }
 }

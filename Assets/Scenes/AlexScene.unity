@@ -288,12 +288,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8af26f74dcd26b944a8c63753a53a7ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  completedObstacles: []
   player: {fileID: 81862973}
   timer: {fileID: 152412491}
   Pooler: {fileID: 1098855336}
   SpawnBeat: 4
   SpawnBar: 2
   ObstacleSpawnDistance: 15
+  ObstacleDespawnDistance: 15
 --- !u!1 &241163335
 GameObject:
   m_ObjectHideFlags: 0
