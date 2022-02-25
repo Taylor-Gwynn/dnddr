@@ -25,6 +25,11 @@ public class ObstaclePath : MonoBehaviour
 
     public int ObstacleSpawnDistance;       // Distance from player (forwards) where obstacles are spawned
     public int ObstacleDespawnDistance;     // Distance from player (backwards) where obstacles are added back to the pool
+
+    //returns the upcoming ObstacleType
+    public ObstacleType GetCurrObstacleType(){
+        throw new NotImplementedException();
+    }
     
     //returns the ChoiceType of the upcoming obstacle
     public ChoiceType GetCurrChoice()
@@ -32,7 +37,7 @@ public class ObstaclePath : MonoBehaviour
         throw new NotImplementedException();
     }
 
-    // returns the point value of a correct input at the current timing
+    // returns the point value of a correct input at the current timing (ie right now)
     public int GetScore()
     {
         throw new NotImplementedException();
