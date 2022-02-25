@@ -21,6 +21,8 @@ namespace Bim
 
         private void Awake()
         {
+            if (_ObstaclePrefabs.Count == 0) Debug.LogError("Please provide obstacle prefabs for " + gameObject.name + ": pooling manager.");
+            
             for (int i = 0; i < _ObstaclePrefabs.Count; i++)
             {
                 for (int j = 0; j < _PoolSizes; j++)
@@ -44,18 +46,28 @@ namespace Bim
         /// </summary>
         public void MakeObstacle()
         {
-            if (_ObstaclePrefabs.Count == 0) Debug.LogError("Please provide obstacle prefabs for " + gameObject.name + ": pooling manager.");
             int index = Random.Range(0, _ObstaclePrefabs.Count);
             MakeObstacle(index);
         }
-        
+
+        /// <summary>
+        /// Make an obstacle of a specific type
+        /// </summary>
+        /// <param name="type"></param>
+        public void MakeObstacle(ObstacleType type)
+        {
+            int index = _obstacleIndexList.IndexOf(type);
+            MakeObstacle(index);
+        }
+
         /// <summary>
         /// Makes a specific obstacle, check the pools list for reference
         /// </summary>
         /// <param name="index"></param>
         public void MakeObstacle(int index)
         {
-            if( _ObstaclePrefabs[index] == null) Debug.LogError("Make object failed, please provide a valid obstacle index.");
+            if ( _ObstaclePrefabs[index] == null) Debug.LogError("Make object failed, please provide a valid obstacle index.");
+            
             GameObject obstacle = _ObstaclePrefabs[index];
             
             Obstacle obj = Instantiate(obstacle, transform).GetComponent<Obstacle>();
