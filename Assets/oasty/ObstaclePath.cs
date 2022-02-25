@@ -29,7 +29,8 @@ public class ObstaclePath : MonoBehaviour
 
     //returns the upcoming ObstacleType
     public ObstacleType GetCurrObstacleType(){
-        throw new NotImplementedException();
+        Obstacle curr = upcomingObstacles.Peek();
+        return curr.GetObstacleType();
     }
     
     //returns the ChoiceType of the upcoming obstacle

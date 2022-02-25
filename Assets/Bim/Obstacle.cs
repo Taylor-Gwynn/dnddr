@@ -32,6 +32,12 @@ namespace Bim
             return _Type;
         }
         
+        public override void OnBeat(){
+
+        }
+        public override void OnBar(){
+            
+        }
         /// <summary>
         /// Used to set the location of the Obstacle
         /// </summary>

@@ -5,7 +5,7 @@ using UnityEngine;
 
 // The class that implements player score, health and animation controllers,
 //      initiates inputs and health/scoring calculations.
-public class Player : MonoBehaviour
+public class Player : BeatMover
 {
     public AnimationClip[] succAnimClips;
     public AnimationClip[] failAnimClips;
@@ -16,8 +16,10 @@ public class Player : MonoBehaviour
     public Animator animator;
     public AnimatorOverrideController animOverride;
     // Start is called before the first frame update
-    void Start()
+    new void Start()
     {
+        base.Start();
+        obstaclePath = GetComponent<ObstaclePath>();
         animator = GetComponent<Animator>();
         animOverride = new AnimatorOverrideController(animator.runtimeAnimatorController);
         // clipOverrides = new AnimationClipOverrides(animatorOverrideController.overridesCount);
@@ -28,7 +30,16 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //for lazy debug:
+        if(Input.anyKeyDown){
+            // StartChoice(ChoiceType.Dex);
+            animator.SetBool("successParam", true);
+            animator.SetTrigger("EnteringInteraction");
+            AnimationClip currWindupAnim = succAnimClips[0]; //assumes "windup" animation is first in the obstacle's list of player animations
+            animOverride["emptyWindupSucc"] = currWindupAnim;
+            animOverride["emptyWindupFail"] = currWindupAnim;
+            Debug.Log("currWindupAnim: "+currWindupAnim.name);
+        }
     }
 
     // called immediately when player inputs a move (returns true iff it was correct choice)
@@ -72,8 +83,13 @@ public class Player : MonoBehaviour
         throw new NotImplementedException();
     }
 
-    private void OnBeat(){
+    public override void OnBeat(){
         //cycles through next animation to put in override...
+        // animator.SetTrigger("EnteringInteraction");
+        // Debug.Log("Player's OnBeat()");
+    }
+
+    public override void OnBar(){
     }
 
 }

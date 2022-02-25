@@ -28,6 +28,10 @@ public class GlobalTimer : MonoBehaviour
         BeatTick();
     }
 
+    public void RegisterListener(BeatMover listener){
+        listeners.Add(listener);
+    }
+
     // increments timers/beats based on Time.deltaTime
     void BeatTick(){
         beatTimer -= Time.deltaTime;
