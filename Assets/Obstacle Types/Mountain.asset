@@ -15,8 +15,4 @@ MonoBehaviour:
   _ChoiceType: 0
   _PlayerSuccessSuccess: 3
   _PlayerSuccessFail: 3
-  _PlayerSuccessClips:
-  - {fileID: 6013492804859811476, guid: cc585badf091db54d8542eedc1d5a27a, type: 3}
-  - {fileID: 7382571628764806917, guid: cc585badf091db54d8542eedc1d5a27a, type: 3}
-  - {fileID: -9126768871606662290, guid: 17af0f083a395db4bab9c47c38c73165, type: 3}
-  _PlayerFailClips: []
+  _PlayerAnimOverride: {fileID: 22100000, guid: a6fe7f12a97b54f4eb75b802c03144f5, type: 2}

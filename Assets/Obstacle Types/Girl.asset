@@ -15,3 +15,4 @@ MonoBehaviour:
   _ChoiceType: 2
   _PlayerSuccessSuccess: 1
   _PlayerSuccessFail: 1
+  _PlayerAnimOverride: {fileID: 22100000, guid: 1131424a56a53f248a67261fb83988fd, type: 2}

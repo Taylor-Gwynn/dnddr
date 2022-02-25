@@ -8,7 +8,7 @@ public abstract class BeatMover : MonoBehaviour
     // An abstract class that reacts to input from the GlobalTimer
 
     public void Start() {
-        Debug.Log("is this happening?: "+this.name);
+        // Debug.Log("is this happening?: "+this.name);
         timer = FindObjectOfType<GlobalTimer>();
         timer.RegisterListener(this);
     }

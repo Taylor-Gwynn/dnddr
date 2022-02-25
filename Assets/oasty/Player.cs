@@ -9,22 +9,19 @@ public class Player : BeatMover
 {
     public AnimationClip[] succAnimClips;
     public AnimationClip[] failAnimClips;
-    public ObstaclePath obstaclePath;
+    private ObstaclePath obstaclePath;
     public ChoiceType currAction;
     public int health;
     public int score;
-    public Animator animator;
-    public AnimatorOverrideController animOverride;
+    private Animator animator;
+    public AnimatorOverrideController TestAnimOverride;
     // Start is called before the first frame update
     new void Start()
     {
         base.Start();
-        obstaclePath = GetComponent<ObstaclePath>();
+        obstaclePath = FindObjectOfType<ObstaclePath>();
         animator = GetComponent<Animator>();
-        animOverride = new AnimatorOverrideController(animator.runtimeAnimatorController);
-        // clipOverrides = new AnimationClipOverrides(animatorOverrideController.overridesCount);
-        // animatorOverrideController.GetOverrides(clipOverrides);
-        animator.runtimeAnimatorController = animOverride;
+        // animator.runtimeAnimatorController = TestAnimOverride;
     }
 
     // Update is called once per frame
@@ -32,44 +29,35 @@ public class Player : BeatMover
     {
         //for lazy debug:
         if(Input.anyKeyDown){
-            // StartChoice(ChoiceType.Dex);
+            StartChoice(ChoiceType.Dex);
             animator.SetBool("successParam", true);
             animator.SetTrigger("EnteringInteraction");
-            AnimationClip currWindupAnim = succAnimClips[0]; //assumes "windup" animation is first in the obstacle's list of player animations
-            animOverride["emptyWindupSucc"] = currWindupAnim;
-            animOverride["emptyWindupFail"] = currWindupAnim;
-            Debug.Log("currWindupAnim: "+currWindupAnim.name);
+            // animator.runtimeAnimatorController = TestAnimOverride2;
+            // AnimationClip currWindupAnim = succAnimClips[0]; //assumes "windup" animation is first in the obstacle's list of player animations
+            // animOverride["emptyWindupSucc"] = currWindupAnim;
+            // animOverride["emptyWindupFail"] = currWindupAnim;
+            // Debug.Log("currWindupAnim: "+currWindupAnim.name);
         }
     }
 
     // called immediately when player inputs a move (returns true iff it was correct choice)
+    //    assumes it is being called only when an input is possible (around beat 4)
     public bool StartChoice(ChoiceType choice){
-        bool success = false;
+        bool isSuccess = false;
         int points = 0;
-        // string currAnim;
+        
         Bim.ObstacleType obstacle = obstaclePath.GetCurrObstacleType();
+    if (obstacle == null){Debug.Log("Did not pull an obstacle from ObstaclePath!");}
         currAction = choice;
-        // if (obstacle._ChoiceType == choice){
-        //     success = true;
-        //     currAnim = obstacle._PlayerSuccessSuccess.ToString();
-        //     points = obstaclePath.GetScore();
-        // }else{
-        //     success = false;
-        //     currAnim = obstacle._PlayerSuccessFail.ToString();
-        //     points = 0;
-        // }
-        success = obstacle._ChoiceType == choice;
-        animator.SetBool("successParam", success);
-        AnimationClip currWindupAnim = obstacle._PlayerSuccessClips[0]; //assumes "windup" animation is first in the obstacle's list of player animations
-        animOverride["emptyWindup"] = currWindupAnim;
-
+        isSuccess = obstacle._ChoiceType == choice;
+        animator.SetBool("successParam", isSuccess);
+        animator.runtimeAnimatorController = obstacle._PlayerAnimOverride; //apply appropriate obstacle animations to the player
+    if (obstacle._PlayerAnimOverride == null){Debug.Log(obstacle.name+" likely has no PlayerAnimOverride!");}
         score += points;
         DisplayScoreQuality(points);
         UpdateHealth(points);
-        // animator.SetTrigger(currAnim);
-        // animator.SetInteger("obstacle", (int)obstaclePath.GetCurrObstacleID());
 
-        return success;
+        return isSuccess;
     }
 
     //damages or increases health based on score and combo(?)
@@ -87,6 +75,7 @@ public class Player : BeatMover
         //cycles through next animation to put in override...
         // animator.SetTrigger("EnteringInteraction");
         // Debug.Log("Player's OnBeat()");
+        animator.SetTrigger("beat");
     }
 
     public override void OnBar(){

@@ -28,7 +28,13 @@ public class ObstaclePath : MonoBehaviour
 
     //returns the upcoming ObstacleType
     public ObstacleType GetCurrObstacleType(){
-        Obstacle curr = upcomingObstacles.Peek();
+        Obstacle curr;
+        if (upcomingObstacles.Count > 0){
+            curr = upcomingObstacles.Peek();
+        }else{
+            Debug.Log("ObstaclePath's upcomingObstacles is empty, cannot peek.");
+            return null;
+        }
         return curr.GetObstacleType();
     }
     
