@@ -332,7 +332,7 @@ MonoBehaviour:
   Pooler: {fileID: 1098855336}
   SpawnBeat: 4
   SpawnBar: 2
-  ObstacleSpawnDistance: 20
+  ObstacleSpawnDistance: 19
   ObstacleDespawnDistance: 30
 --- !u!1 &241163335
 GameObject:
@@ -554,13 +554,33 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3837892449480290538, guid: 34e601bd18e3f0041943dab9f4c06e00, type: 3}
-      propertyPath: Input
+      propertyPath: DEXFailClip
       value: 
-      objectReference: {fileID: 1372617044}
+      objectReference: {fileID: 2164020820738512209, guid: 73a385dff61ae2e4fb97e28aae455912, type: 3}
     - target: {fileID: 3837892449480290538, guid: 34e601bd18e3f0041943dab9f4c06e00, type: 3}
-      propertyPath: noneAnimOverride
+      propertyPath: STRFailClip
       value: 
-      objectReference: {fileID: 22100000, guid: e3122757c1456b74facb294fa6204670, type: 2}
+      objectReference: {fileID: 7946465877833056166, guid: 73a385dff61ae2e4fb97e28aae455912, type: 3}
+    - target: {fileID: 3837892449480290538, guid: 34e601bd18e3f0041943dab9f4c06e00, type: 3}
+      propertyPath: CHA_animOverride
+      value: 
+      objectReference: {fileID: 22100000, guid: 1131424a56a53f248a67261fb83988fd, type: 2}
+    - target: {fileID: 3837892449480290538, guid: 34e601bd18e3f0041943dab9f4c06e00, type: 3}
+      propertyPath: CON_animOverride
+      value: 
+      objectReference: {fileID: 22100000, guid: dbcf227523d6f894c8116c72c58d3040, type: 2}
+    - target: {fileID: 3837892449480290538, guid: 34e601bd18e3f0041943dab9f4c06e00, type: 3}
+      propertyPath: DEX_animOverride
+      value: 
+      objectReference: {fileID: 22100000, guid: a6fe7f12a97b54f4eb75b802c03144f5, type: 2}
+    - target: {fileID: 3837892449480290538, guid: 34e601bd18e3f0041943dab9f4c06e00, type: 3}
+      propertyPath: INT_animOverride
+      value: 
+      objectReference: {fileID: 22100000, guid: bcb3bfb1187b598419e278d58863bb77, type: 2}
+    - target: {fileID: 3837892449480290538, guid: 34e601bd18e3f0041943dab9f4c06e00, type: 3}
+      propertyPath: STR_animOverride
+      value: 
+      objectReference: {fileID: 22100000, guid: ed87a4d231a06b94c9cb36b54bf74f89, type: 2}
     - target: {fileID: 4144304554406308596, guid: 34e601bd18e3f0041943dab9f4c06e00, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1190,17 +1210,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 17af0f083a395db4bab9c47c38c73165, type: 3}
   m_PrefabInstance: {fileID: 1299736956}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1372617044 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5560827838607957593, guid: 34e601bd18e3f0041943dab9f4c06e00, type: 3}
-  m_PrefabInstance: {fileID: 689943350}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1713272953
 PrefabInstance:
   m_ObjectHideFlags: 0

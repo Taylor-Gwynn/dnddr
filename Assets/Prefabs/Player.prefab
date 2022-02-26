@@ -1833,6 +1833,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a49561acc626c1342b3b2a4959f0a31b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  STR_animOverride: {fileID: 22100000, guid: 668999384d64b434b9f3540362960939, type: 2}
+  CHA_animOverride: {fileID: 22100000, guid: 1f53d90550a330448b17e1786df33449, type: 2}
+  DEX_animOverride: {fileID: 22100000, guid: e5710eee88e38a6448d263639c241efe, type: 2}
+  INT_animOverride: {fileID: 22100000, guid: 4d1359fc2dbabe740a21ff68dea8eb88, type: 2}
+  CON_animOverride: {fileID: 22100000, guid: 56913cd367eb1cd45b848ae8123be725, type: 2}
   Input: {fileID: 5560827838607957593}
   currAction: 0
   health: 0

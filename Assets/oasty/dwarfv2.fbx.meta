@@ -48,6 +48,15 @@ ModelImporter:
   - first:
       74: -5242680266815347109
     second: dwarfSkel|thinking
+  - first:
+      74: 7946465877833056166
+    second: dwarfSkel|dwarf_attack_fail
+  - first:
+      74: 3323293181929912283
+    second: dwarfSkel|dwarf_attack_succ
+  - first:
+      74: 5874716078449660853
+    second: dwarfSkel|dwarf_attack_windup
   externalObjects: {}
   materials:
     materialImportMode: 2

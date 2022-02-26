@@ -10,6 +10,11 @@ public class Player : BeatMover
 {
     // public AnimationClip[] succAnimClips;
     // public AnimationClip[] failAnimClips;
+    public AnimatorOverrideController STR_animOverride;
+    public AnimatorOverrideController CHA_animOverride;
+    public AnimatorOverrideController DEX_animOverride;
+    public AnimatorOverrideController INT_animOverride;
+    public AnimatorOverrideController CON_animOverride;
     public PlayerInput Input;
     // public GlobalTimer timer;
     private ObstaclePath obstaclePath;
@@ -78,8 +83,7 @@ public class Player : BeatMover
     // called immediately when player inputs a move (returns true iff it was correct choice)
     //    NO LONGER assumes it is being called only when an input is possible (around beat 4)
     public bool StartChoice(ChoiceType choice){
-        Debug.Log("Player Input: " + choice.ToString());
-        Debug.Log("Valid Timing: " + ValidActionTime());
+        Debug.Log("Player Input: " + choice.ToString()+", Valid Timing: " + ValidActionTime());
         
         // Check the Timer to see if input is allowed at this beat
         if (!ValidActionTime())
@@ -94,17 +98,23 @@ public class Player : BeatMover
         bool isSuccess = false;
         int points = 0;
         
-        Bim.ObstacleType obstacle = obstaclePath.GetCurrObstacle().GetObstacleType();
-        if (obstacle == null){Debug.Log("Did not pull an obstacle from ObstaclePath!");}
-        
-        isSuccess = obstacle._ChoiceType == choice;
+        Bim.ObstacleType obstacleType = obstaclePath.GetCurrObstacle().GetObstacleType();
+        Bim.Obstacle obstacle = obstaclePath.GetCurrObstacle();
+        if (obstacleType == null){Debug.Log("Did not pull an obstacle from ObstaclePath!");}
+        isSuccess = obstacleType._ChoiceType == choice;
+        obstacle.Interact(isSuccess);
         animator.SetBool("successParam", isSuccess);
         animator.SetTrigger("WindupInteraction");
         // animator.ResetTrigger("WindupInteraction");
-
-        animator.runtimeAnimatorController = obstacle._PlayerAnimOverride; //apply appropriate obstacle animations to the player
+        if (isSuccess){
+            Debug.Log("correct choice!!!!!!");
+            animator.runtimeAnimatorController = obstacleType._PlayerAnimOverride; //apply appropriate obstacle animations to the player
+        }else{
+            Debug.Log("wrong choice..");
+            animator.runtimeAnimatorController = ChooseFailClip(currAction); //apply choice animations
+        }
         
-        if (obstacle._PlayerAnimOverride == null){Debug.Log(obstacle.name+" likely has no PlayerAnimOverride!");}
+        if (obstacleType._PlayerAnimOverride == null){Debug.Log(obstacleType.name+" likely has no PlayerAnimOverride!");}
         
         score += points;
         DisplayScoreQuality(points);
@@ -138,19 +148,29 @@ public class Player : BeatMover
         // throw new NotImplementedException();
     }
 
+    public AnimatorOverrideController ChooseFailClip(ChoiceType choice){
+        switch (choice)
+        {
+            case ChoiceType.Dex:
+                return DEX_animOverride;
+            case ChoiceType.Con:
+                return CON_animOverride;
+            case ChoiceType.Cha:
+                return CHA_animOverride;
+            case ChoiceType.Int:
+                return INT_animOverride;
+                case ChoiceType.Str:
+                return STR_animOverride;
+            default:
+                Debug.Log("Error: player probably does not have fail clips assigned script");
+                return null;
+        }
+    }
+
+
     public override void OnBeat(){
-        Debug.Log("onBeat "+timer.GetBeat()+", currAction: "+currAction+", isDoingAction: "+isDoingAction);
+        // Debug.Log("onBeat "+timer.GetBeat()+", currAction: "+currAction+", isDoingAction: "+isDoingAction);
         animator.ResetTrigger("WindupInteraction");
-        // if (currAction != ChoiceType.None){ //if an input was successfully recieved, begin interaction
-        //     isDoingAction = true;
-        // }else{
-        //     isDoingAction = false;
-        // }
-        
-        // Debug.Log("Player's OnBeat()");
-        // animator.SetTrigger("beat"); // <- for segmented animations... eh... probably won't.
-        // animator.ResetTrigger("EndingInteraction");
-        // animator.ResetTrigger("BeginningAction");
     }
 
     public override void OnBar(){
@@ -169,6 +189,7 @@ public class Player : BeatMover
             isDoingAction = true;
             Debug.Log("OnBar: beginningAction!");
             animator.SetTrigger("BeginningAction");
+
             animator.ResetTrigger("EndingInteraction");
         }
         

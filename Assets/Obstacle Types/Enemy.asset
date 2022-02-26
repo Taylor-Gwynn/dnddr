@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d54dbc7ed921de24ba338e05416a7692, type: 3}
   m_Name: Enemy
   m_EditorClassIdentifier: 
-  _ChoiceType: 0
+  _ChoiceType: 1
   _PlayerSuccessSuccess: 0
   _PlayerSuccessFail: 0
   _PlayerAnimOverride: {fileID: 22100000, guid: ed87a4d231a06b94c9cb36b54bf74f89, type: 2}

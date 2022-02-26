@@ -48,9 +48,11 @@ namespace Bim
 
         //
         public void Interact(bool isSuccess){
-            animator.runtimeAnimatorController = _Type._AnimOverride;
             animator.SetBool("successParam", true);
-            animator.SetTrigger("EnteringInteraction");
+            animator.SetTrigger("WindupInteraction");
+            animator.SetTrigger("BeginningAction");
+            Debug.Log("overwriting controller of "+name+": _Type="+_Type+" animOverride: "+_Type._AnimOverride);
+            animator.runtimeAnimatorController = _Type._AnimOverride;
         }
     }
 }
