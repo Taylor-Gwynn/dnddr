@@ -54,19 +54,22 @@ public class GlobalTimer : MonoBehaviour
 
     void SendBeat(){
         if (au != null){
-            au.pitch = 1;
+            if (beat == 1)
+            {
+                au.pitch = 2;
+            }
+            else
+            {
+                au.pitch = 1;
+            }
             au.Play();
         }
-        // Debug.Log("Beat: " + beat);
+        // Debug.Log("Beat: " + GetPreciseBeat());
         foreach (BeatMover x in listeners){
             x.OnBeat();
         }
     }
     void SendBar(){
-        if (au != null){
-            au.pitch = 2;
-            au.Play();
-        }
         // Debug.Log("Bar:  " + bar);
         foreach (BeatMover x in listeners){
             x.OnBar();
@@ -81,5 +84,13 @@ public class GlobalTimer : MonoBehaviour
     public int GetBar()
     {
         return bar;
+    }
+
+    // Returns the beat we're on as a float rounded to 2 decimal places
+    public float GetPreciseBeat()
+    {
+        float preciseBeat = beat + ((beatTimerDefault - beatTimer) / beatTimerDefault) - 1;
+        
+        return Mathf.Round(preciseBeat * 100f) / 100f; 
     }
 }

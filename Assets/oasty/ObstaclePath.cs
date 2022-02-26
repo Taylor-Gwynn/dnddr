@@ -23,8 +23,8 @@ public class ObstaclePath : MonoBehaviour
     public int SpawnBar;            // Bar to spawn an obstacle on (1 = every bar, 2 = every other bar..)
     private int nextSpawnBar;       // When the next obstacle is going to be spawned
 
-    public int ObstacleSpawnDistance;       // Distance from player (forwards) where obstacles are spawned
-    public int ObstacleDespawnDistance;     // Distance from player (backwards) where obstacles are added back to the pool
+    public float ObstacleSpawnDistance;       // Distance from player (forwards) where obstacles are spawned
+    public float ObstacleDespawnDistance;     // Distance from player (backwards) where obstacles are added back to the pool
 
     //returns the upcoming Obstacle
     public Obstacle GetCurrObstacle(){

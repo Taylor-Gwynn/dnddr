@@ -11,6 +11,7 @@ public class Player : BeatMover
     // public AnimationClip[] succAnimClips;
     // public AnimationClip[] failAnimClips;
     public PlayerInput Input;
+    // public GlobalTimer timer;
     private ObstaclePath obstaclePath;
     public ChoiceType currAction;
     public int health;
@@ -29,26 +30,32 @@ public class Player : BeatMover
     {
         if (Input.actions["Dex"].triggered)
         {
-            Debug.Log("Dex Action");
+            currAction = ChoiceType.Dex;
+            StartChoice(currAction);
         }
         else if (Input.actions["Str"].triggered)
         {
-            Debug.Log("Str Action");
+            currAction = ChoiceType.Str;
+            StartChoice(currAction);
         }
         else if (Input.actions["Con"].triggered)
         {
-            Debug.Log("Con Action");
+            currAction = ChoiceType.Con;
+            StartChoice(currAction);
         }
         else if (Input.actions["Int"].triggered)
         {
-            Debug.Log("Int Action");
+            currAction = ChoiceType.Int;
+            StartChoice(currAction);
         }
         else if (Input.actions["Cha"].triggered)
         {
-            Debug.Log("Cha Action");
+            currAction = ChoiceType.Cha;
+            StartChoice(currAction);
         }
         
-        // //for lazy debug:
+
+        //for lazy debug:
         // if(Input.anyKeyDown){
         //     StartChoice(ChoiceType.Dex);
         //     animator.SetBool("successParam", true);
@@ -63,23 +70,48 @@ public class Player : BeatMover
     }
 
     // called immediately when player inputs a move (returns true iff it was correct choice)
-    //    assumes it is being called only when an input is possible (around beat 4)
+    //    NO LONGER assumes it is being called only when an input is possible (around beat 4)
     public bool StartChoice(ChoiceType choice){
+        Debug.Log("Player Input: " + choice.ToString());
+        Debug.Log("Valid Timing: " + ValidActionTime());
+        
+        // Check the Timer to see if input is allowed at this beat
+        if (!ValidActionTime())
+        {
+            // Subtract score
+            // Play fail sound/animation
+            return false;
+        }
+
         bool isSuccess = false;
         int points = 0;
         
         Bim.ObstacleType obstacle = obstaclePath.GetCurrObstacle().GetObstacleType();
-    if (obstacle == null){Debug.Log("Did not pull an obstacle from ObstaclePath!");}
-        currAction = choice;
+        if (obstacle == null){Debug.Log("Did not pull an obstacle from ObstaclePath!");}
+        
         isSuccess = obstacle._ChoiceType == choice;
         animator.SetBool("successParam", isSuccess);
         animator.runtimeAnimatorController = obstacle._PlayerAnimOverride; //apply appropriate obstacle animations to the player
-    if (obstacle._PlayerAnimOverride == null){Debug.Log(obstacle.name+" likely has no PlayerAnimOverride!");}
+        
+        if (obstacle._PlayerAnimOverride == null){Debug.Log(obstacle.name+" likely has no PlayerAnimOverride!");}
+        
         score += points;
         DisplayScoreQuality(points);
         UpdateHealth(points);
 
         return isSuccess;
+    }
+
+    // Checks if the the current time is a valid for an action
+    // Valid times are between beats 3.5 and 4.5
+    private bool ValidActionTime()
+    {
+        float validStart = 3.5f;
+        float validEnd = 4.5f;
+        float currentBeat = timer.GetPreciseBeat();     // Metronome sound seems to have a ~500ms delay
+
+        // Second part of the | is there since we coded the beat to start at 0, so it accounts for beat 4.5 actually being represented as 0.5
+        return (currentBeat >= validStart & currentBeat <= validEnd) | (validEnd > timer.TIME_SIGNATURE & currentBeat < validEnd - timer.TIME_SIGNATURE);
     }
 
     //damages or increases health based on score and combo(?)

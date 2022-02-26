@@ -2,7 +2,7 @@ public enum ChoiceType
 {
     Dex,
     Str,
-    Chr,
+    Cha,
     Int,
     Con
 }

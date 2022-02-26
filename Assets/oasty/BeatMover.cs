@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class BeatMover : MonoBehaviour
 {
-    private GlobalTimer timer;
+    protected internal GlobalTimer timer;
     protected Animator animator;
     // An abstract class that reacts to input from the GlobalTimer
 

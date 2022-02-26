@@ -332,7 +332,7 @@ MonoBehaviour:
   Pooler: {fileID: 1098855336}
   SpawnBeat: 4
   SpawnBar: 2
-  ObstacleSpawnDistance: 15
+  ObstacleSpawnDistance: 20
   ObstacleDespawnDistance: 30
 --- !u!1 &241163335
 GameObject:
@@ -1028,6 +1028,10 @@ PrefabInstance:
       propertyPath: Input
       value: 
       objectReference: {fileID: 862079992}
+    - target: {fileID: 3837892449480290538, guid: 34e601bd18e3f0041943dab9f4c06e00, type: 3}
+      propertyPath: timer
+      value: 
+      objectReference: {fileID: 152412491}
     - target: {fileID: 4144304554406308596, guid: 34e601bd18e3f0041943dab9f4c06e00, type: 3}
       propertyPath: m_Name
       value: Player
