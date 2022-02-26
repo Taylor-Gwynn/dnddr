@@ -13,16 +13,19 @@ public class Player : BeatMover
     public PlayerInput Input;
     // public GlobalTimer timer;
     private ObstaclePath obstaclePath;
-    public ChoiceType currAction;
+    public ChoiceType currAction;           // set as soon as input is recieved, from windup to the end of anim. Is None otherwise.
     public int health;
     public int score;
+    private bool isDoingAction;             // set when the action takes place, after windup ends.
+    private bool isAtObstacle;              // set when player is occupying space (within bar) of object action
+    public AnimatorOverrideController noneAnimOverride;
     // Start is called before the first frame update
     new void Start()
     {
         base.Start();
         obstaclePath = FindObjectOfType<ObstaclePath>();
         
-        // animator.runtimeAnimatorController = TestAnimOverride;
+        animator.runtimeAnimatorController = noneAnimOverride;
     }
 
     // Update is called once per frame
@@ -55,11 +58,14 @@ public class Player : BeatMover
         }
         
 
+        // animator.ResetTrigger("beat");//deprecated trigger
+        
+
         //for lazy debug:
         // if(Input.anyKeyDown){
         //     StartChoice(ChoiceType.Dex);
         //     animator.SetBool("successParam", true);
-        //     animator.SetTrigger("EnteringInteraction");
+        //     animator.SetTrigger("WindupInteraction");
         //     obstaclePath.GetCurrObstacle().Interact(true);
         //     // animator.runtimeAnimatorController = TestAnimOverride2;
         //     // AnimationClip currWindupAnim = succAnimClips[0]; //assumes "windup" animation is first in the obstacle's list of player animations
@@ -78,8 +84,10 @@ public class Player : BeatMover
         // Check the Timer to see if input is allowed at this beat
         if (!ValidActionTime())
         {
+            currAction = ChoiceType.None;
             // Subtract score
             // Play fail sound/animation
+
             return false;
         }
 
@@ -91,6 +99,9 @@ public class Player : BeatMover
         
         isSuccess = obstacle._ChoiceType == choice;
         animator.SetBool("successParam", isSuccess);
+        animator.SetTrigger("WindupInteraction");
+        // animator.ResetTrigger("WindupInteraction");
+
         animator.runtimeAnimatorController = obstacle._PlayerAnimOverride; //apply appropriate obstacle animations to the player
         
         if (obstacle._PlayerAnimOverride == null){Debug.Log(obstacle.name+" likely has no PlayerAnimOverride!");}
@@ -111,7 +122,9 @@ public class Player : BeatMover
         float currentBeat = timer.GetPreciseBeat();     // Metronome sound seems to have a ~500ms delay
 
         // Second part of the | is there since we coded the beat to start at 0, so it accounts for beat 4.5 actually being represented as 0.5
-        return (currentBeat >= validStart & currentBeat <= validEnd) | (validEnd > timer.TIME_SIGNATURE & currentBeat < validEnd - timer.TIME_SIGNATURE);
+        return (currentBeat >= validStart & currentBeat <= validEnd) 
+                | (validEnd > timer.TIME_SIGNATURE & currentBeat < validEnd - timer.TIME_SIGNATURE)
+                && obstaclePath.GetInRange(this.transform);
     }
 
     //damages or increases health based on score and combo(?)
@@ -126,13 +139,39 @@ public class Player : BeatMover
     }
 
     public override void OnBeat(){
-        //cycles through next animation to put in override...
-        // animator.SetTrigger("EnteringInteraction");
+        Debug.Log("onBeat "+timer.GetBeat()+", currAction: "+currAction+", isDoingAction: "+isDoingAction);
+        animator.ResetTrigger("WindupInteraction");
+        // if (currAction != ChoiceType.None){ //if an input was successfully recieved, begin interaction
+        //     isDoingAction = true;
+        // }else{
+        //     isDoingAction = false;
+        // }
+        
         // Debug.Log("Player's OnBeat()");
-        animator.SetTrigger("beat");
+        // animator.SetTrigger("beat"); // <- for segmented animations... eh... probably won't.
+        // animator.ResetTrigger("EndingInteraction");
+        // animator.ResetTrigger("BeginningAction");
     }
 
     public override void OnBar(){
+        //resume walking after action?
+        if (isDoingAction){
+            currAction = ChoiceType.None;
+            isDoingAction = false;
+            Debug.Log("resume walking after action...");
+            animator.SetTrigger("EndingInteraction");
+            animator.ResetTrigger("BeginningAction");
+
+        }
+
+        //start action if winding up?
+        if (currAction != ChoiceType.None){//should be set by StartChoice()
+            isDoingAction = true;
+            Debug.Log("OnBar: beginningAction!");
+            animator.SetTrigger("BeginningAction");
+            animator.ResetTrigger("EndingInteraction");
+        }
+        
     }
 
 }

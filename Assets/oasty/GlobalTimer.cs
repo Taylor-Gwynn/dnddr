@@ -40,14 +40,16 @@ public class GlobalTimer : MonoBehaviour
         beatTimer -= Time.deltaTime;
         // We have reached a new beat
         if (beatTimer < 0){
+            if (beat == 1){
+                SendBar();
+            }
             SendBeat();
             beat++;
             beatTimer = beatTimerDefault;
-            // We have reached a new bar
+            // We have reached a new bar (next beat)
             if (beat > TIME_SIGNATURE){
                 bar++;
                 beat = 1;
-                SendBar();
             }
         }
     }

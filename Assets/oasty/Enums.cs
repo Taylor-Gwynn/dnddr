@@ -4,7 +4,8 @@ public enum ChoiceType
     Str,
     Cha,
     Int,
-    Con
+    Con,
+    None
 }
 
 //a unique identifier for each obstacle (for identifying animations)

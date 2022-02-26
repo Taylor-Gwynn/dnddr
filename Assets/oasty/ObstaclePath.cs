@@ -39,6 +39,11 @@ public class ObstaclePath : MonoBehaviour
         return curr;
     }
     
+    //returns true if the upcoming obstacle is in range of a transform (can be activated on this imminent bar)
+    public bool GetInRange(Transform t){
+        return (GetCurrObstacle().transform.position - t.position).magnitude < ObstacleDespawnDistance /10.0f; //I honestly don't know
+
+    }
 
     // returns the point value of a correct input at the current timing (ie right now)
     public int GetScore()
