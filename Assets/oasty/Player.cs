@@ -11,6 +11,8 @@ public class Player : BeatMover
     // public AnimationClip[] succAnimClips;
     // public AnimationClip[] failAnimClips;
     public GameObject PlayerMovement;
+    private float movespeed;
+    public TMPro.TMP_Text ScoreText;
     public AnimatorOverrideController STR_animOverride;
     public AnimatorOverrideController CHA_animOverride;
     public AnimatorOverrideController DEX_animOverride;
@@ -24,13 +26,17 @@ public class Player : BeatMover
     public int score;
     private bool isDoingAction = false;             // set when the action takes place, after windup ends.
     // private bool isAtObstacle;              // set when player is occupying space (within bar) of object action
+    private Vector3 anchorSpot;                 // the place to stop in front of an obstacle ( placed in OnBeat() )
     public AnimatorOverrideController noneAnimOverride;
     // Start is called before the first frame update
     new void Start()
     {
         base.Start();
+        movespeed = PlayerMovement.GetComponent<goforward>().forward.magnitude;
+
         obstaclePath = FindObjectOfType<ObstaclePath>();
-        
+        ScoreText = GetComponentInChildren<TMPro.TMP_Text>();
+
         animator.runtimeAnimatorController = noneAnimOverride;
     }
 
@@ -38,7 +44,7 @@ public class Player : BeatMover
     void Update()
     {
         if (!isDoingAction){
-            Approach(PlayerMovement, 10f*Time.deltaTime);
+            Approach(PlayerMovement, 5f*movespeed*Time.deltaTime);
         }
 
         if (Input.actions["Dex"].triggered)
@@ -84,31 +90,66 @@ public class Player : BeatMover
             return false;
         }
 
-        bool isSuccess = false;
+        //init
+        bool isMatch = false;
         int points = 0;
-        
+        //getting info from obstacle
         Bim.ObstacleType obstacleType = obstaclePath.GetCurrObstacle().GetObstacleType();
         Bim.Obstacle obstacle = obstaclePath.GetCurrObstacle();
         if (obstacleType == null){Debug.Log("Did not pull an obstacle from ObstaclePath!");}
-        isSuccess = obstacleType._ChoiceType == choice;
-        obstacle.Interact(isSuccess);
-        animator.SetBool("successParam", isSuccess);
+        //checking if it's right
+        isMatch = obstacleType._ChoiceType == choice;
+        obstacle.Interact(isMatch);
+        //setting animators in motion
+        animator.SetBool("successParam", isMatch);
         animator.SetTrigger("WindupInteraction");
-        if (isSuccess){
-            Debug.Log("correct choice!!!!!!");
+        if (isMatch){
+            Debug.Log("matching choice!");
             animator.runtimeAnimatorController = obstacleType._PlayerAnimOverride; //apply appropriate obstacle animations to the player
         }else{
-            Debug.Log("wrong choice..");
+            Debug.Log("different choice..");
             animator.runtimeAnimatorController = ChooseFailClip(currAction); //apply choice animations
         }
-        
         if (obstacleType._PlayerAnimOverride == null){Debug.Log(obstacleType.name+" likely has no PlayerAnimOverride!");}
         
-        score += points;
-        DisplayScoreQuality(points);
-        UpdateHealth(points);
+        //analyzing the rhythmic timing
+        float timing = timer.GetPreciseBeat();
+        Debug.Log("~~~~~~~~~~timing: "+timing);
+        // if (timing > 0){ //if pressed late,
+        //     this.transform.position = anchorSpot; //snap position back to where the beat was
+        // }
+        Judgement judgement;
+        if (Math.Abs(timing) > 0.4 || isMatch != obstacle._isSupposedToPass){ //too far out (or wrong)
+            judgement = Judgement.miss;
+        }else if(timing < 0){   //earlies
+            if (Math.Abs(timing) > .35){
+                judgement = Judgement.bad;
+            }else if (Math.Abs(timing) > .26){
+                judgement = Judgement.goodEarly;
+            }else if (Math.Abs(timing) > .13){
+                judgement = Judgement.greatEarly;
+            }else{
+                judgement = Judgement.perfectEarly;
+            }
+        }else{                  //lates
+            if (Math.Abs(timing) > .35){
+                judgement = Judgement.bad;
+            }else if (Math.Abs(timing) > .26){
+                judgement = Judgement.goodLate;
+            }else if (Math.Abs(timing) > .13){
+                judgement = Judgement.greatLate;
+            }else{
+                judgement = Judgement.perfectLate;
+            }
+        }
 
-        return isSuccess;
+        
+        points = HitScoreQuality(judgement);
+        score += points;
+        UpdateHealth(judgement);
+        UpdateScoreUI();
+
+        return isMatch;
     }
 
     // Checks if the the current time is a valid for an action
@@ -126,13 +167,35 @@ public class Player : BeatMover
     }
 
     //damages or increases health based on score and combo(?)
-    private void UpdateHealth(int score){
+    private void UpdateHealth(Judgement judge){
         // throw new NotImplementedException();
     }
 
-    // draws "good", "great", "perfect" or "miss" icon near player
-    private void DisplayScoreQuality(int points)
+    //draws current score on HUD
+    private void UpdateScoreUI(){
+        ScoreText.text = "Score: "+score;
+    }
+
+    // returns point value of judgement, draws "good", "great", "perfect" or "miss" icon near player
+    private int HitScoreQuality(Judgement judgement)
     {
+        switch (judgement){
+            case Judgement.miss:
+                return -3;
+            case Judgement.bad:
+                return -5;
+            case Judgement.goodEarly:
+            case Judgement.goodLate:
+                return 3;
+            case Judgement.greatEarly:
+            case Judgement.greatLate:
+                return 5;
+            case Judgement.perfectEarly:
+            case Judgement.perfectLate:
+                return 6;
+            default:
+                return 0;   
+        }
         // throw new NotImplementedException();
     }
 
@@ -169,9 +232,11 @@ public class Player : BeatMover
     public override void OnBeat(){
         // Debug.Log("onBeat "+timer.GetBeat()+", currAction: "+currAction+", isDoingAction: "+isDoingAction);
         animator.ResetTrigger("WindupInteraction");
+        anchorSpot = this.transform.position;
     }
 
     public override void OnBar(){
+
         //resume walking after action?
         if (isDoingAction){
             currAction = ChoiceType.None;
