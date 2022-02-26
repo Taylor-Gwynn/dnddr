@@ -1,15 +1,15 @@
-using System;
 using System.Collections.Generic;
+using Bim;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Bim
+namespace Obstacle_Stuff
 {
     /// <summary>
     /// Responsible for pooling the obstacles in the scene.
     /// Intended to be set in the editor and only accessed by some manager class that request an object when needed
     /// </summary>
-    public class PoolingManager : MonoBehaviour
+    public class ObstaclePoolingManager : MonoBehaviour
     {
         [Header("Required Parameters")]
         public int _PoolSizes;
@@ -21,6 +21,8 @@ namespace Bim
 
         private void Awake()
         {
+            if (_ObstaclePrefabs.Count == 0) Debug.LogError("Please provide obstacle prefabs for " + gameObject.name + ": pooling manager.");
+            
             for (int i = 0; i < _ObstaclePrefabs.Count; i++)
             {
                 for (int j = 0; j < _PoolSizes; j++)
@@ -42,20 +44,20 @@ namespace Bim
         /// <summary>
         /// Makes a random obstacle, if assigned obstacles.
         /// </summary>
-        public void MakeObstacle()
+        private void MakeObstacle()
         {
-            if (_ObstaclePrefabs.Count == 0) Debug.LogError("Please provide obstacle prefabs for " + gameObject.name + ": pooling manager.");
             int index = Random.Range(0, _ObstaclePrefabs.Count);
             MakeObstacle(index);
         }
-        
+
         /// <summary>
         /// Makes a specific obstacle, check the pools list for reference
         /// </summary>
         /// <param name="index"></param>
-        public void MakeObstacle(int index)
+        private void MakeObstacle(int index)
         {
-            if( _ObstaclePrefabs[index] == null) Debug.LogError("Make object failed, please provide a valid obstacle index.");
+            if ( _ObstaclePrefabs[index] == null) Debug.LogError("Make object failed, please provide a valid obstacle index.");
+            
             GameObject obstacle = _ObstaclePrefabs[index];
             
             Obstacle obj = Instantiate(obstacle, transform).GetComponent<Obstacle>();
