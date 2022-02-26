@@ -1,15 +1,15 @@
-using System;
 using System.Collections.Generic;
+using Bim;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Bim
+namespace Obstacle_Stuff
 {
     /// <summary>
     /// Responsible for pooling the obstacles in the scene.
     /// Intended to be set in the editor and only accessed by some manager class that request an object when needed
     /// </summary>
-    public class PoolingManager : MonoBehaviour
+    public class ObstaclePoolingManager : MonoBehaviour
     {
         [Header("Required Parameters")]
         public int _PoolSizes;

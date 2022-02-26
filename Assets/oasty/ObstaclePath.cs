@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Bim;
+using Obstacle_Stuff;
 using UnityEngine;
 
 // The class that stores obstacles, moves the player along them, 
@@ -17,7 +18,7 @@ public class ObstaclePath : MonoBehaviour
     public Player player;
     // public GameObject GlobalTimerObject;   //reference to the object tracking the time, in "beats"
     public GlobalTimer timer;
-    public PoolingManager Pooler;
+    public ObstaclePoolingManager Pooler;
     
     public int SpawnBeat;           // Beat to spawn an obstacle on
     public int SpawnBar;            // Bar to spawn an obstacle on (1 = every bar, 2 = every other bar..)
