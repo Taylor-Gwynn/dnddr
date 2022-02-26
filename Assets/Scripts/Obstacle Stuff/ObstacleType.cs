@@ -11,7 +11,7 @@ namespace Bim
         public ChoiceType _ChoiceType;
         public PlayerSuccessAnimations _PlayerSuccessSuccess;
         public PlayerFailAnimations _PlayerSuccessFail;
-        public AnimationClip[] _PlayerSuccessClips;
-        public AnimationClip[] _PlayerFailClips;
+        public AnimatorOverrideController _PlayerAnimOverride;
+        public AnimatorOverrideController _AnimOverride;
     }
 }

@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 5ea6184459d2e354a8d4753bf4b68804
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/OLDAlexScene.unity
+    guid: 6182ef93cbfebe344afb86a00520eb97
   m_configObjects: {}

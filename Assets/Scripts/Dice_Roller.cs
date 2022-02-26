@@ -17,15 +17,25 @@ public class Dice_Roller : MonoBehaviour
     private int displayNum;
     private float rollStartTime;
     private bool rollStarted = false;
+    private SkinnedMeshRenderer mesh;
+    private Animator animator;
     
+    private void Start() {
+        mesh = GetComponentInChildren<SkinnedMeshRenderer>();
+        animator = GetComponent<Animator>();
+        
+        //debug:
+        // animator.SetTrigger("roll");
+        SetNumOnMaterial(1);
+    }
     void Update()
     {
-        if (Input.GetKeyDown("r") & !rollStarted)
-        {
-            rollStartTime = Time.time;
-            rollStarted = true;
-            lastRollTime = Time.time;
-        }
+        // if (Input.GetKeyDown("r") & !rollStarted)
+        // {
+        //     rollStartTime = Time.time;
+        //     rollStarted = true;
+        //     lastRollTime = Time.time;
+        // }
 
         if (rollStarted)
         {
@@ -40,11 +50,13 @@ public class Dice_Roller : MonoBehaviour
         {
             result = Random.Range(1, 21);
             displayNum = result;
+            SetNumOnMaterial(result);
+            animator.SetTrigger("roll");
             rollStarted = false;
         }
         else if (Time.time - lastRollTime >= _rollSpeed)
         {
-            displayNum = Random.Range(1, 20);
+            displayNum = Random.Range(1, 21);
             lastRollTime = Time.time;
         }
     }
@@ -57,5 +69,19 @@ public class Dice_Roller : MonoBehaviour
     public int GetDisplayNum()
     {
         return displayNum;
+    }
+
+    public float NumToUVOffset(int dieNumber){
+        //UV offset y = 0       : 20
+        //UV offset y = -0.0259  : 1
+        //UV offset y = -0.496  : 20
+        float offset = (-(0.496f-0.0259f)/19)*((dieNumber));
+        // Debug.Log("offset: "+offset);
+        return offset;
+    }
+
+    public void SetNumOnMaterial(int dieNumber){
+        float offset = NumToUVOffset(dieNumber);
+        mesh.material.SetTextureOffset("_MainTex", new Vector2(0, offset));
     }
 }

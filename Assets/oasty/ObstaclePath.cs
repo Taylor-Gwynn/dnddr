@@ -27,17 +27,18 @@ public class ObstaclePath : MonoBehaviour
     public int ObstacleSpawnDistance;       // Distance from player (forwards) where obstacles are spawned
     public int ObstacleDespawnDistance;     // Distance from player (backwards) where obstacles are added back to the pool
 
-    //returns the upcoming ObstacleType
-    public ObstacleType GetCurrObstacleType(){
-        Obstacle curr = upcomingObstacles.Peek();
-        return curr.GetObstacleType();
+    //returns the upcoming Obstacle
+    public Obstacle GetCurrObstacle(){
+        Obstacle curr;
+        if (upcomingObstacles.Count > 0){
+            curr = upcomingObstacles.Peek();
+        }else{
+            Debug.Log("ObstaclePath's upcomingObstacles is empty, cannot peek.");
+            return null;
+        }
+        return curr;
     }
     
-    //returns the ChoiceType of the upcoming obstacle
-    public ChoiceType GetCurrChoice()
-    {
-        throw new NotImplementedException();
-    }
 
     // returns the point value of a correct input at the current timing (ie right now)
     public int GetScore()
