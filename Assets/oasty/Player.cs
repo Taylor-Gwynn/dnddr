@@ -10,6 +10,7 @@ public class Player : BeatMover
 {
     // public AnimationClip[] succAnimClips;
     // public AnimationClip[] failAnimClips;
+    public GameObject PlayerMovement;
     public AnimatorOverrideController STR_animOverride;
     public AnimatorOverrideController CHA_animOverride;
     public AnimatorOverrideController DEX_animOverride;
@@ -21,8 +22,8 @@ public class Player : BeatMover
     public ChoiceType currAction;           // set as soon as input is recieved, from windup to the end of anim. Is None otherwise.
     public int health;
     public int score;
-    private bool isDoingAction;             // set when the action takes place, after windup ends.
-    private bool isAtObstacle;              // set when player is occupying space (within bar) of object action
+    private bool isDoingAction = false;             // set when the action takes place, after windup ends.
+    // private bool isAtObstacle;              // set when player is occupying space (within bar) of object action
     public AnimatorOverrideController noneAnimOverride;
     // Start is called before the first frame update
     new void Start()
@@ -36,6 +37,10 @@ public class Player : BeatMover
     // Update is called once per frame
     void Update()
     {
+        if (!isDoingAction){
+            Approach(PlayerMovement, 10f*Time.deltaTime);
+        }
+
         if (Input.actions["Dex"].triggered)
         {
             currAction = ChoiceType.Dex;
@@ -62,22 +67,6 @@ public class Player : BeatMover
             StartChoice(currAction);
         }
         
-
-        // animator.ResetTrigger("beat");//deprecated trigger
-        
-
-        //for lazy debug:
-        // if(Input.anyKeyDown){
-        //     StartChoice(ChoiceType.Dex);
-        //     animator.SetBool("successParam", true);
-        //     animator.SetTrigger("WindupInteraction");
-        //     obstaclePath.GetCurrObstacle().Interact(true);
-        //     // animator.runtimeAnimatorController = TestAnimOverride2;
-        //     // AnimationClip currWindupAnim = succAnimClips[0]; //assumes "windup" animation is first in the obstacle's list of player animations
-        //     // animOverride["emptyWindupSucc"] = currWindupAnim;
-        //     // animOverride["emptyWindupFail"] = currWindupAnim;
-        //     // Debug.Log("currWindupAnim: "+currWindupAnim.name);
-        // }
     }
 
     // called immediately when player inputs a move (returns true iff it was correct choice)
@@ -105,7 +94,6 @@ public class Player : BeatMover
         obstacle.Interact(isSuccess);
         animator.SetBool("successParam", isSuccess);
         animator.SetTrigger("WindupInteraction");
-        // animator.ResetTrigger("WindupInteraction");
         if (isSuccess){
             Debug.Log("correct choice!!!!!!");
             animator.runtimeAnimatorController = obstacleType._PlayerAnimOverride; //apply appropriate obstacle animations to the player
@@ -167,6 +155,16 @@ public class Player : BeatMover
         }
     }
 
+    // moves the player towards the given object with speed given
+    public void Approach(GameObject obj, float speed){
+        float MIN_SNAP_DIST = 0.1f;
+        if ((obj.transform.position -this.transform.position).magnitude < MIN_SNAP_DIST){
+            this.transform.position = obj.transform.position;
+        }else{
+            Vector3 towards = (obj.transform.position-this.transform.position).normalized * speed;
+            this.transform.position += towards;
+        }
+    }
 
     public override void OnBeat(){
         // Debug.Log("onBeat "+timer.GetBeat()+", currAction: "+currAction+", isDoingAction: "+isDoingAction);

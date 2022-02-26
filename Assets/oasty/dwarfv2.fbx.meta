@@ -57,6 +57,24 @@ ModelImporter:
   - first:
       74: 5874716078449660853
     second: dwarfSkel|dwarf_attack_windup
+  - first:
+      74: 2667701962424190664
+    second: dwarfSkel|dwarf_flex_succ
+  - first:
+      74: -6410834182667311451
+    second: dwarfSkel|dwarf_flex_windup
+  - first:
+      74: -5400046546076407653
+    second: dwarfSkel|dwarf_flex_fail
+  - first:
+      74: 5109709222941614878
+    second: dwarfSkel|dwarf_block_fail
+  - first:
+      74: 3307595628320098162
+    second: dwarfSkel|dwarf_block_succ
+  - first:
+      74: 6476703354939918837
+    second: dwarfSkel|dwarf_block_windup
   externalObjects: {}
   materials:
     materialImportMode: 2
