@@ -34,6 +34,10 @@ public class Player : BeatMover
 
     public GameObject GameOverText;
     public HealthManager HPManager;
+
+    public AudioSource soundulon;
+    public AudioClip correctNoise;
+    public AudioClip wrongNoise;
     
     // Start is called before the first frame update
     new void Start()
@@ -47,6 +51,7 @@ public class Player : BeatMover
         animator.runtimeAnimatorController = noneAnimOverride;
         
         GameOverText.SetActive(false);
+        soundulon = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -103,6 +108,8 @@ public class Player : BeatMover
             HPManager.ReduceHealth(.25f);
             // Subtract score
             // Play fail sound/animation
+            soundulon.clip = wrongNoise;
+            soundulon.Play();
 
             return false;
         }
@@ -141,7 +148,9 @@ public class Player : BeatMover
         Judgement judgement;
         if (Math.Abs(timing) > 0.4 || isMatch != obstacle._IsSupposedToPass){ //too far out (or wrong)
             judgement = Judgement.miss;
+            soundulon.clip = wrongNoise;
         }else if(timing < 0){   //earlies
+            soundulon.clip = correctNoise;
             if (Math.Abs(timing) > .35){
                 judgement = Judgement.bad;
             }else if (Math.Abs(timing) > .26){
@@ -152,6 +161,7 @@ public class Player : BeatMover
                 judgement = Judgement.perfectEarly;
             }
         }else{                  //lates
+            soundulon.clip = correctNoise;
             if (Math.Abs(timing) > .35){
                 judgement = Judgement.bad;
             }else if (Math.Abs(timing) > .26){
@@ -201,6 +211,7 @@ public class Player : BeatMover
     // returns point value of judgement, draws "good", "great", "perfect" or "miss" icon near player
     private int HitScoreQuality(Judgement judgement)
     {
+        soundulon.Play();
         switch (judgement){
             case Judgement.miss:
                 return -3;
