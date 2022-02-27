@@ -16,6 +16,7 @@ public class ObstaclePath : MonoBehaviour
     public List<Obstacle> completedObstacles = new List<Obstacle>();
                                 
     public Player player;
+    public GameObject playerMovement;       // the empty object moving forward at a constant pace
     // public GameObject GlobalTimerObject;   //reference to the object tracking the time, in "beats"
     public GlobalTimer timer;
     public ObstaclePoolingManager Pooler;
@@ -75,7 +76,7 @@ public class ObstaclePath : MonoBehaviour
     void SpawnObstacle()
     {
         Obstacle obs = Pooler.GetObstacle();
-        obs.transform.position = player.transform.position + new Vector3(0, 0, ObstacleSpawnDistance);
+        obs.transform.position = playerMovement.transform.position + new Vector3(0, 0, ObstacleSpawnDistance);
         upcomingObstacles.Enqueue(obs);
     }
 
@@ -83,7 +84,7 @@ public class ObstaclePath : MonoBehaviour
     {
         for (int i = 0; i < completedObstacles.Count; i++)
         {
-            if (player.transform.position.z - completedObstacles[i].transform.position.z >= ObstacleDespawnDistance)
+            if (playerMovement.transform.position.z - completedObstacles[i].transform.position.z >= ObstacleDespawnDistance)
             {
                 completedObstacles[i].ReturnObstacle();
                 completedObstacles.RemoveAt(i);
@@ -98,7 +99,7 @@ public class ObstaclePath : MonoBehaviour
     {
         if (upcomingObstacles.Count == 0) return;
         
-        if (upcomingObstacles.Peek().transform.position.z < player.transform.position.z)
+        if (upcomingObstacles.Peek().transform.position.z < playerMovement.transform.position.z)
         {
             completedObstacles.Add(upcomingObstacles.Dequeue());
         }
