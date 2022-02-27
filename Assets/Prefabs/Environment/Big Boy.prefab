@@ -819,7 +819,6 @@ GameObject:
   - component: {fileID: 3038678168016489072}
   - component: {fileID: -600201620856959302}
   - component: {fileID: 7085349336231376019}
-  - component: {fileID: 6065519010549265783}
   m_Layer: 6
   m_Name: Big Boy
   m_TagString: Untagged
@@ -853,7 +852,7 @@ Animator:
   m_GameObject: {fileID: 2804304820357740335}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f018f51211051a948bb89e11e12c8b68, type: 2}
+  m_Controller: {fileID: 9100000, guid: 70e79f7ab1ee6b24680ad74c24a2b0fa, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -887,24 +886,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5341158, y: 1.7562593, z: 0.4783108}
   m_Center: {x: 0.0036493873, y: 0.85994345, z: 0.18874195}
---- !u!114 &6065519010549265783
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2804304820357740335}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6df38d4465b9fea4c84d9b6e02b96d98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _Animator: {fileID: 3038678168016489072}
-  _List:
-  - {fileID: 9100000, guid: 834349f149ca2c240890a009911c0fa8, type: 2}
-  - {fileID: 9100000, guid: f018f51211051a948bb89e11e12c8b68, type: 2}
-  - {fileID: 9100000, guid: 70e79f7ab1ee6b24680ad74c24a2b0fa, type: 2}
-  - {fileID: 9100000, guid: 5eec3e288836d814390aaa6d7bd15b94, type: 2}
 --- !u!1 &2983321065082564638
 GameObject:
   m_ObjectHideFlags: 0
