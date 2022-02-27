@@ -250,7 +250,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8238772766502277952}
   - component: {fileID: 395885060730678280}
-  m_Layer: 0
+  - component: {fileID: 3145082347524894491}
+  m_Layer: 6
   m_Name: Mountain Big
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -285,3 +286,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47a674450d1c4ee4e886adf7f4618dfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &3145082347524894491
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8727360912869526010}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.75, y: 1, z: 2.75}
+  m_Center: {x: 0, y: 0.5, z: 0}
