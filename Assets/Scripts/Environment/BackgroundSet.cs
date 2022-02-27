@@ -78,42 +78,46 @@ namespace Environment
         {
             PoolObject piece = _SetPieces.GetObject();
             
-            // find a random location
-            // Vector3 relativeLocation = new Vector3(Random.Range(_OriginOffset.x, _OriginOffset.x + _SpawnRange.x),
-            //     0,
-            //     Random.Range(_OriginOffset.z, _OriginOffset.z + _SpawnRange.z));
+            Vector3 potentialPosition = new Vector3();
+            bool acceptablePlacement = false;
+            int num = 100;
+            
+            var position = _Origin.transform.position;
+            
+            while(!acceptablePlacement)
+            {
+                num--;
 
-            Vector3 relativeLocation = FindLocation(100);
+                float x = position.x + _OriginOffset.x + Random.Range(-_SpawnRange.x, _SpawnRange.x);
+                float y = position.y + _OriginOffset.y + Random.Range(-_SpawnRange.y, _SpawnRange.y);
+                float z = position.z + _OriginOffset.z + Random.Range(-_SpawnRange.z, _SpawnRange.z);
+                
+                potentialPosition = new Vector3(x,y,z);
+
+                var results = Physics.OverlapSphere(potentialPosition, _SafetyRange, _AvoidanceMask);
+
+                acceptablePlacement = results.Length == 0;
+
+                if (num == 0) break;
+            }
+
+            if (!acceptablePlacement)
+            {
+                piece.ReturnObject();
+                return;
+            }
             
             // position the object relative to the player and offset in the found random location
-            piece.PositionObject( relativeLocation + _Origin.position, Quaternion.identity, transform);
+            piece.PositionObject( potentialPosition, Quaternion.Euler(0, 90, 0), transform);
             
             _PiecesInUse.Add(piece);
         }
 
-        private Vector3 FindLocation(int attempts)
-        {
-            Vector3 relativeLocation = new Vector3();
-                
-            for (int i = 0; i < attempts; i++)
-            {
-                relativeLocation = new Vector3(Random.Range(_OriginOffset.x, _OriginOffset.x + _SpawnRange.x),
-                    0,
-                    Random.Range(_OriginOffset.z, _OriginOffset.z + _SpawnRange.z));
-
-                Collider[] results = Physics.OverlapSphere(relativeLocation, _SafetyRange, _AvoidanceMask);
-                
-                if (results.Length == 0)
-                {
-                    break;
-                }
-                
-                Debug.Log("Results contain " + results.Length + " overlaps");
-                
-                if(i == 99) Debug.LogError("Maxed out attempts to spawn things");
-            }
-
-            return relativeLocation;
-        }
+        // private Vector3 FindLocation(int attempts)
+        // {
+        //     
+        //
+        //     return potentialPosition;
+        // }
     }
 }
