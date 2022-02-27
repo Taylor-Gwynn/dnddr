@@ -23,7 +23,7 @@ namespace Player_Stuff
         
         [Range(0,1)]
         [SerializeField]
-        private float _CurrentHealth;
+        public float _CurrentHealth;
 
         private float _maxWidth;
         private float _maxHeight;
