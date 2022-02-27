@@ -23,17 +23,12 @@ public class Dice_Roller : MonoBehaviour
     private void Start() {
         mesh = GetComponentInChildren<SkinnedMeshRenderer>();
         animator = GetComponent<Animator>();
-        
-        //debug:
-        // animator.SetTrigger("roll");
-        SetNumOnMaterial(1);
     }
     void Update()
     {
         if (rollStarted)
         {
             Roll();
-            _diceText.text = displayNum.ToString();
         }
     }
 
@@ -76,5 +71,10 @@ public class Dice_Roller : MonoBehaviour
     public void SetNumOnMaterial(int dieNumber){
         float offset = NumToUVOffset(dieNumber);
         mesh.material.SetTextureOffset("_MainTex", new Vector2(0, offset));
+    }
+
+    public void RollDie()
+    {
+        rollStarted = true;
     }
 }

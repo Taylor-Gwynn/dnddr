@@ -1783,7 +1783,9 @@ GameObject:
   - component: {fileID: 3837892449480290540}
   - component: {fileID: 3837892449480290541}
   - component: {fileID: 3837892449480290538}
-  m_Layer: 0
+  - component: {fileID: 4386904073099120088}
+  - component: {fileID: 886363833655503616}
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1868,6 +1870,35 @@ MonoBehaviour:
   noneAnimOverride: {fileID: 22100000, guid: e3122757c1456b74facb294fa6204670, type: 2}
   GameOverText: {fileID: 7598156579653304175}
   HPManager: {fileID: 2222925755718146774}
+--- !u!65 &4386904073099120088
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4144304554406308596}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.8844042, z: 0.8631996}
+  m_Center: {x: 0, y: 0.7474232, z: 0.068400204}
+--- !u!54 &886363833655503616
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4144304554406308596}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4315789038467030157
 GameObject:
   m_ObjectHideFlags: 0
