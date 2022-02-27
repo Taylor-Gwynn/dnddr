@@ -31,6 +31,7 @@ public class ObstaclePath : MonoBehaviour
     public float ObstacleDespawnDistance;     // Distance from player (backwards) where obstacles are added back to the pool
 
     public GameObject actionIndicatorPrefab;
+    private bool spawnedActionIndicator;
     
     //returns the upcoming Obstacle
     public Obstacle GetCurrObstacle(){
@@ -60,6 +61,7 @@ public class ObstaclePath : MonoBehaviour
     void Start()
     {
         nextSpawnBar = SpawnBar;
+        spawnedActionIndicator = false;
     }
 
     // Update is called once per frame
@@ -71,13 +73,15 @@ public class ObstaclePath : MonoBehaviour
             DespawnObstacles();
             SpawnObstacle();
             nextSpawnBar += SpawnBar;
+            spawnedActionIndicator = false;
         }
         
         // Logic for spawning action indicator 1 beat before obstacles
-        if (timer.GetBar() == nextSpawnBar & timer.GetBeat() == SpawnBeat - 1)
+        if (timer.GetBar() == nextSpawnBar & timer.GetBeat() == SpawnBeat - 1 & spawnedActionIndicator == false)
         {
             DespawnActionIndicators();
             SpawnActionIndicator();
+            spawnedActionIndicator = true;
         }
         
         // Testing Method
@@ -107,7 +111,7 @@ public class ObstaclePath : MonoBehaviour
     void SpawnActionIndicator()
     {
         // obs.transform.position = player.transform.position + new Vector3(0, 0, ObstacleSpawnDistance);
-        GameObject actionIndicator = Instantiate(actionIndicatorPrefab, player.transform.position + new Vector3(0, 0, ObstacleSpawnDistance), Quaternion.identity, this.transform);
+        GameObject actionIndicator = Instantiate(actionIndicatorPrefab, player.transform.position + new Vector3(0, 0.02f, ObstacleSpawnDistance - 0.4f), Quaternion.Euler(-90f, 0f, 0f), this.transform);
 
         actionIndicators.Add(actionIndicator);
     }

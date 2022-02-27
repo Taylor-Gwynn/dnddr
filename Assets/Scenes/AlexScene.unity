@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.24414471, g: 0.2255297, b: 0.24901605, a: 1}
+  m_IndirectSpecularColor: {r: 0.24414477, g: 0.22552976, b: 0.24901608, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -328,12 +328,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   completedObstacles: []
   player: {fileID: 1082444529}
+  playerMovement: {fileID: 1769271527}
   timer: {fileID: 152412491}
   Pooler: {fileID: 1098855336}
   SpawnBeat: 4
   SpawnBar: 2
   ObstacleSpawnDistance: 19
   ObstacleDespawnDistance: 30
+  actionIndicatorPrefab: {fileID: 2218504087426929362, guid: 70e7aefe88b03c5459a70687cee0427d, type: 3}
 --- !u!1 &241163335
 GameObject:
   m_ObjectHideFlags: 0
