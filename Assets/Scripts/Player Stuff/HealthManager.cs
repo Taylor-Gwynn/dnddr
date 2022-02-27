@@ -16,6 +16,7 @@ namespace Player_Stuff
         [Range(0,1)]
         public float _StandardHpReduction;
 
+        [Range(0,1)]
         public float _StandardHpIncrease;
 
         public float _VisualTransitionSmoothing;
