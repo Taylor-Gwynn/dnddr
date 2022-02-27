@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Player_Stuff;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -22,7 +23,6 @@ public class Player : BeatMover
     // public GlobalTimer timer;
     private ObstaclePath obstaclePath;
     public ChoiceType currAction = ChoiceType.None;           // set as soon as input is recieved, from windup to the end of anim. Is None otherwise.
-    public int health;
     public int score;
     public bool isDoingAction = false;             // set when the action takes place, after windup ends.
     // private bool isAtObstacle;              // set when player is occupying space (within bar) of object action
@@ -31,6 +31,9 @@ public class Player : BeatMover
     
     private float validActionStart = 3.3f;
     private float validActionEnd = 4.8f;
+
+    public GameObject GameOverText;
+    public HealthManager HPManager;
     
     // Start is called before the first frame update
     new void Start()
@@ -42,6 +45,8 @@ public class Player : BeatMover
         ScoreText = GetComponentInChildren<TMPro.TMP_Text>();
 
         animator.runtimeAnimatorController = noneAnimOverride;
+        
+        GameOverText.SetActive(false);
     }
 
     // Update is called once per frame
@@ -75,6 +80,13 @@ public class Player : BeatMover
         {
             currAction = ChoiceType.Cha;
             StartChoice(currAction);
+        }
+        
+        // Game Over
+        if (HPManager._CurrentHealth <= 0)
+        {
+            GameOverText.SetActive(true);
+            Time.timeScale = 0;
         }
         
     }
@@ -150,6 +162,12 @@ public class Player : BeatMover
         
         points = HitScoreQuality(judgement);
         score += points;
+
+        if (points < 0)
+        {
+            HPManager.ReduceHealth(0.2f);
+        }
+        
         UpdateHealth(judgement);
         UpdateScoreUI();
 
