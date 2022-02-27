@@ -47,7 +47,6 @@ public class Player : BeatMover
         movespeed = PlayerMovement.GetComponent<goforward>().forward.magnitude;
 
         obstaclePath = FindObjectOfType<ObstaclePath>();
-        ScoreText = GetComponentInChildren<TMPro.TMP_Text>();
 
         animator.runtimeAnimatorController = noneAnimOverride;
         
