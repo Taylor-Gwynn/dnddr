@@ -10,14 +10,15 @@ namespace Environment
     {
         [Header("Set Settings")]
         public EnvironmentPool _SetPieces;
-
         public int _Density;
+        public LayerMask _AvoidanceMask;
         
         [Header("Placement settings")]
         public Transform _Origin;
         public Vector3 _OriginOffset;
         public Vector3 _SpawnRange;
         public float _RefreshDistance;
+        public float _SafetyRange;
 
         [Header("Clean up settings")] 
         [Tooltip("How far does a set piece need to be before we hide it from the player.")]
@@ -78,14 +79,41 @@ namespace Environment
             PoolObject piece = _SetPieces.GetObject();
             
             // find a random location
-            Vector3 relativeLocation = new Vector3(Random.Range(_OriginOffset.x, _OriginOffset.x + _SpawnRange.x),
-                0,
-                Random.Range(_OriginOffset.z, _OriginOffset.z + _SpawnRange.z));
+            // Vector3 relativeLocation = new Vector3(Random.Range(_OriginOffset.x, _OriginOffset.x + _SpawnRange.x),
+            //     0,
+            //     Random.Range(_OriginOffset.z, _OriginOffset.z + _SpawnRange.z));
+
+            Vector3 relativeLocation = FindLocation(100);
             
             // position the object relative to the player and offset in the found random location
             piece.PositionObject( relativeLocation + _Origin.position, Quaternion.identity, transform);
             
             _PiecesInUse.Add(piece);
+        }
+
+        private Vector3 FindLocation(int attempts)
+        {
+            Vector3 relativeLocation = new Vector3();
+                
+            for (int i = 0; i < attempts; i++)
+            {
+                relativeLocation = new Vector3(Random.Range(_OriginOffset.x, _OriginOffset.x + _SpawnRange.x),
+                    0,
+                    Random.Range(_OriginOffset.z, _OriginOffset.z + _SpawnRange.z));
+
+                Collider[] results = Physics.OverlapSphere(relativeLocation, _SafetyRange, _AvoidanceMask);
+                
+                if (results.Length == 0)
+                {
+                    break;
+                }
+                
+                Debug.Log("Results contain " + results.Length + " overlaps");
+                
+                if(i == 99) Debug.LogError("Maxed out attempts to spawn things");
+            }
+
+            return relativeLocation;
         }
     }
 }
