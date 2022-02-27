@@ -1,23 +1,17 @@
 fileFormatVersion: 2
-guid: 9ef4a38674b30cd4d81800bef0d7ccb2
+guid: 57e76920c69cc244b8ac183e7008fbaf
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
+  - first:
+      74: -6135804815953315210
+    second: doorSkel|CubeAction
   - first:
       74: -7178910071010731875
     second: doorSkel|doorClosed
   - first:
       74: -5625793816671104716
     second: doorSkel|doorOpen
-  - first:
-      74: -6135804815953315210
-    second: doorSkel|CubeAction
-  - first:
-      74: 9065932805642250698
-    second: doorSkel|doorClosed_v2
-  - first:
-      74: -8791804047320842105
-    second: doorSkel|doorOpen_v2
   externalObjects: {}
   materials:
     materialImportMode: 2

@@ -1,23 +1,20 @@
 fileFormatVersion: 2
-guid: 9ef4a38674b30cd4d81800bef0d7ccb2
+guid: b2c83fdee731d9340aa4679eb6fbfbf6
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
-      74: -7178910071010731875
-    second: doorSkel|doorClosed
+      74: -2838202606965128013
+    second: ballistaSkel|ballistaRef
   - first:
-      74: -5625793816671104716
-    second: doorSkel|doorOpen
+      74: -1056682684430494807
+    second: ballistaSkel|ballistaShoot_blocked
   - first:
-      74: -6135804815953315210
-    second: doorSkel|CubeAction
+      74: 161994406865237491
+    second: ballistaSkel|ballistaShoot_hits
   - first:
-      74: 9065932805642250698
-    second: doorSkel|doorClosed_v2
-  - first:
-      74: -8791804047320842105
-    second: doorSkel|doorOpen_v2
+      74: -8425532051378915071
+    second: ballistaSkel|CubeAction
   externalObjects: {}
   materials:
     materialImportMode: 2

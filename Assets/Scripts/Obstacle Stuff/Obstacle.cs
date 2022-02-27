@@ -28,6 +28,11 @@ namespace Bim
             
         }
 
+        new public void Start(){
+            base.Start();
+            animator.runtimeAnimatorController = _Type._AnimOverride;
+        }
+
         public ObstacleType GetObstacleType()
         {
             return _Type;
@@ -54,7 +59,7 @@ namespace Bim
             animator.SetTrigger("WindupInteraction");
             animator.SetTrigger("BeginningAction");
             Debug.Log("overwriting controller of "+name+": _Type="+_Type+" animOverride: "+_Type._AnimOverride);
-            animator.runtimeAnimatorController = _Type._AnimOverride;
+            // animator.runtimeAnimatorController = _Type._AnimOverride;
         }
     }
 }
