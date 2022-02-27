@@ -111,7 +111,7 @@ public class ObstaclePath : MonoBehaviour
     void SpawnActionIndicator()
     {
         // obs.transform.position = player.transform.position + new Vector3(0, 0, ObstacleSpawnDistance);
-        GameObject actionIndicator = Instantiate(actionIndicatorPrefab, player.transform.position + new Vector3(0, 0.02f, ObstacleSpawnDistance - 0.4f), Quaternion.Euler(-90f, 0f, 0f), this.transform);
+        GameObject actionIndicator = Instantiate(actionIndicatorPrefab, player.transform.position + new Vector3(0, 0.02f, ObstacleSpawnDistance - 0.5f), Quaternion.Euler(-90f, 0f, 0f), this.transform);
 
         actionIndicators.Add(actionIndicator);
     }

@@ -23,7 +23,7 @@ namespace Player_Stuff
         
         [Range(0,1)]
         [SerializeField]
-        private float _CurrentHealth;
+        public float _CurrentHealth;
 
         private float _maxWidth;
         private float _maxHeight;
@@ -55,7 +55,7 @@ namespace Player_Stuff
         // quirky lerp
         private void UpdateHealthBar()
         {
-            float newWidth = Mathf.Lerp(_HpBar.sizeDelta.x, _CurrentHealth * _maxWidth, Time.deltaTime * _VisualTransitionSmoothing);
+            float newWidth = Mathf.Lerp(_HpBar.sizeDelta.x, _CurrentHealth * _maxWidth, Time.unscaledDeltaTime * _VisualTransitionSmoothing);
             _HpBar.sizeDelta = new Vector2( newWidth, _maxHeight);
         }
 
