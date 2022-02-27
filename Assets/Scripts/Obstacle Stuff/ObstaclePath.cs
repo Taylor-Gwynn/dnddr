@@ -14,7 +14,9 @@ public class ObstaclePath : MonoBehaviour
     // completedObstacles that are off-screen are despawned
     public Queue<Obstacle> upcomingObstacles = new Queue<Obstacle>();
     public List<Obstacle> completedObstacles = new List<Obstacle>();
-                                
+
+    private List<GameObject> actionIndicators = new List<GameObject>();
+    
     public Player player;
     // public GameObject GlobalTimerObject;   //reference to the object tracking the time, in "beats"
     public GlobalTimer timer;
@@ -27,6 +29,8 @@ public class ObstaclePath : MonoBehaviour
     public float ObstacleSpawnDistance;       // Distance from player (forwards) where obstacles are spawned
     public float ObstacleDespawnDistance;     // Distance from player (backwards) where obstacles are added back to the pool
 
+    public GameObject actionIndicatorPrefab;
+    
     //returns the upcoming Obstacle
     public Obstacle GetCurrObstacle(){
         Obstacle curr;
@@ -68,6 +72,13 @@ public class ObstaclePath : MonoBehaviour
             nextSpawnBar += SpawnBar;
         }
         
+        // Logic for spawning action indicator 1 beat before obstacles
+        if (timer.GetBar() == nextSpawnBar & timer.GetBeat() == SpawnBeat - 1)
+        {
+            DespawnActionIndicators();
+            SpawnActionIndicator();
+        }
+        
         // Testing Method
         TempInteractWithObstacles();
     }
@@ -92,6 +103,27 @@ public class ObstaclePath : MonoBehaviour
         }
     }
 
+    void SpawnActionIndicator()
+    {
+        // obs.transform.position = player.transform.position + new Vector3(0, 0, ObstacleSpawnDistance);
+        GameObject actionIndicator = Instantiate(actionIndicatorPrefab, player.transform.position + new Vector3(0, 0, ObstacleSpawnDistance), Quaternion.identity, this.transform);
+
+        actionIndicators.Add(actionIndicator);
+    }
+
+    void DespawnActionIndicators()
+    {
+        for (int i = 0; i < actionIndicators.Count; i++)
+        {
+            if (player.transform.position.z - actionIndicators[i].transform.position.z >= ObstacleDespawnDistance)
+            {
+                Destroy(actionIndicators[i]);
+                actionIndicators.RemoveAt(i);
+                i--;
+            }
+        }
+    }
+    
     // Testing method for moving obstacles from upcoming to completed
     // Now that I think about it we can probably keep this since the player will always pass objects they've interacted with
     void TempInteractWithObstacles()

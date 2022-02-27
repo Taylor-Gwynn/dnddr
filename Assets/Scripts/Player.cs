@@ -28,6 +28,10 @@ public class Player : BeatMover
     // private bool isAtObstacle;              // set when player is occupying space (within bar) of object action
     private Vector3 anchorSpot;                 // the place to stop in front of an obstacle ( placed in OnBeat() )
     public AnimatorOverrideController noneAnimOverride;
+    
+    private float validActionStart = 3.3f;
+    private float validActionEnd = 4.8f;
+    
     // Start is called before the first frame update
     new void Start()
     {
@@ -156,13 +160,11 @@ public class Player : BeatMover
     // Valid times are between beats 3.5 and 4.5
     private bool ValidActionTime()
     {
-        float validStart = 3.5f;
-        float validEnd = 4.5f;
         float currentBeat = timer.GetPreciseBeat();     // Metronome sound seems to have a ~500ms delay
 
         // Second part of the | is there since we coded the beat to start at 0, so it accounts for beat 4.5 actually being represented as 0.5
-        return (currentBeat >= validStart & currentBeat <= validEnd) 
-                | (validEnd > timer.TIME_SIGNATURE & currentBeat < validEnd - timer.TIME_SIGNATURE)
+        return (currentBeat >= validActionStart & currentBeat <= validActionEnd) 
+                | (validActionEnd > timer.TIME_SIGNATURE & currentBeat < validActionEnd - timer.TIME_SIGNATURE)
                 && obstaclePath.GetInRange(this.transform);
     }
 

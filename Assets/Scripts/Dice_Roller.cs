@@ -30,14 +30,6 @@ public class Dice_Roller : MonoBehaviour
     }
     void Update()
     {
-        // Replace this with a distance check from the player
-        // if (Input.GetKeyDown("r") & !rollStarted)
-        // {
-        //     rollStartTime = Time.time;
-        //     rollStarted = true;
-        //     lastRollTime = Time.time;
-        // }
-
         if (rollStarted)
         {
             Roll();
