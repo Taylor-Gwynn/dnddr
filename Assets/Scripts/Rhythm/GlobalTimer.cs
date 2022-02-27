@@ -14,6 +14,8 @@ public class GlobalTimer : MonoBehaviour
     private float beatTimer;            // Time until the next beat
     private AudioSource au;
     private AudioSource mu;
+    public AudioClip musicClip;
+    public AudioClip scaryClip;
 
     // Start is called before the first frame update
     void Start()
@@ -79,6 +81,11 @@ public class GlobalTimer : MonoBehaviour
             x.OnBar();
         }
         if (!mu.isPlaying && Time.timeSinceLevelLoad > 1f){
+            if(FindObjectOfType<Player_Stuff.HealthManager>()._CurrentHealth < .35f){
+                mu.clip = musicClip;
+            }else{
+                mu.clip = scaryClip;
+            }
             mu.Play();
         }
     }
