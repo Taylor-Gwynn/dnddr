@@ -21,10 +21,10 @@ public class Player : BeatMover
     public PlayerInput Input;
     // public GlobalTimer timer;
     private ObstaclePath obstaclePath;
-    public ChoiceType currAction;           // set as soon as input is recieved, from windup to the end of anim. Is None otherwise.
+    public ChoiceType currAction = ChoiceType.None;           // set as soon as input is recieved, from windup to the end of anim. Is None otherwise.
     public int health;
     public int score;
-    private bool isDoingAction = false;             // set when the action takes place, after windup ends.
+    public bool isDoingAction = false;             // set when the action takes place, after windup ends.
     // private bool isAtObstacle;              // set when player is occupying space (within bar) of object action
     private Vector3 anchorSpot;                 // the place to stop in front of an obstacle ( placed in OnBeat() )
     public AnimatorOverrideController noneAnimOverride;
@@ -221,6 +221,7 @@ public class Player : BeatMover
     // moves the player towards the given object with speed given
     public void Approach(GameObject obj, float speed){
         float MIN_SNAP_DIST = 0.1f;
+        // float MIN_SNAP_DIST = 100f; //uncomment to always snap to "sync"
         if ((obj.transform.position -this.transform.position).magnitude < MIN_SNAP_DIST){
             this.transform.position = obj.transform.position;
         }else{
