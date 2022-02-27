@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d54dbc7ed921de24ba338e05416a7692, type: 3}
   m_Name: Balista
   m_EditorClassIdentifier: 
-  _ChoiceType: 0
+  _ChoiceType: 4
   _PlayerSuccessSuccess: 0
   _PlayerSuccessFail: 0
   _PlayerAnimOverride: {fileID: 22100000, guid: dbcf227523d6f894c8116c72c58d3040, type: 2}
