@@ -112,8 +112,8 @@ namespace Obstacle_Stuff
         /// <returns></returns>
         public Obstacle GetObstacle()
         {
-            // ObstacleType type = _obstacleIndexList[Random.Range(0, _ObstaclePrefabs.Count)];
-            ObstacleType type = _obstacleIndexList[3];// swap comment with above to temporarily remove randomness for debugging
+            ObstacleType type = _obstacleIndexList[Random.Range(0, _ObstaclePrefabs.Count)];
+            // ObstacleType type = _obstacleIndexList[3];// swap comment with above to temporarily remove randomness for debugging
             return GetObstacle(type);
         }
         
