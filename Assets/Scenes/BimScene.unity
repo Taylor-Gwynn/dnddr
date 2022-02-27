@@ -440,12 +440,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   completedObstacles: []
   player: {fileID: 768203560}
+  playerMovement: {fileID: 0}
   timer: {fileID: 152412491}
   Pooler: {fileID: 1098855336}
   SpawnBeat: 4
   SpawnBar: 2
   ObstacleSpawnDistance: 15
   ObstacleDespawnDistance: 30
+  actionIndicatorPrefab: {fileID: 0}
 --- !u!1 &241163335
 GameObject:
   m_ObjectHideFlags: 0
@@ -1470,7 +1472,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _SetPieces: {fileID: 428475414}
-  _Density: 5
+  _Density: 3
   _AvoidanceMask:
     serializedVersion: 2
     m_Bits: 64
