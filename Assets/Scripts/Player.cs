@@ -181,16 +181,17 @@ public class Player : BeatMover
 
         
         points = HitScoreQuality(judgement);
-        score += points;
-
-        if (points < 0)
+        
+        if (points > 0)
         {
-            HPManager.ReduceHealth(0.1f);
+            score += points;
+            HPManager.AddHealth(.25f);
         }
         else
         {
-            HPManager.AddHealth(.25f);
+            HPManager.ReduceHealth(0.1f);
         }
+
 
         UpdateScoreUI();
 

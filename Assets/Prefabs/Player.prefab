@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _HpBar: {fileID: 3600893039871931700}
-  _DecayRate: 0.05
+  _DecayRate: 0.02
   _StandardHpReduction: 0.1
   _StandardHpIncrease: 0.25
   _VisualTransitionSmoothing: 3
