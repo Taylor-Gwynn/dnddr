@@ -9,8 +9,6 @@ namespace Bim
     public class ObstacleType : ScriptableObject
     {
         public ChoiceType _ChoiceType;
-        public PlayerSuccessAnimations _PlayerSuccessSuccess;
-        public PlayerFailAnimations _PlayerSuccessFail;
         public AnimatorOverrideController _PlayerAnimOverride;
         public AnimatorOverrideController _AnimOverride;
     }

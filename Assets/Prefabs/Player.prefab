@@ -1032,7 +1032,7 @@ RectTransform:
   m_Children:
   - {fileID: 4728172287609211129}
   m_Father: {fileID: 3659271061219553358}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1568,12 +1568,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3837892450209578150}
-  m_LocalRotation: {x: 0.12694637, y: -0.69561815, z: 0.12694637, w: 0.69561815}
-  m_LocalPosition: {x: 7.15, y: 4.63, z: 1}
+  m_LocalRotation: {x: 0.12694639, y: -0.69561815, z: 0.12694636, w: 0.69561815}
+  m_LocalPosition: {x: 7.1499996, y: 4.629999, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3659271061219553358}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 20.685, y: -90, z: 0}
 --- !u!20 &3837892450209578148
 Camera:
@@ -1783,9 +1783,9 @@ Transform:
   m_Children:
   - {fileID: 3938452851133976853}
   - {fileID: 5411117033643255217}
-  - {fileID: 3837892450209578147}
   - {fileID: 6837140642623131316}
   - {fileID: 907373009833186006}
+  - {fileID: 3837892450209578147}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1833,11 +1833,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a49561acc626c1342b3b2a4959f0a31b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  STR_animOverride: {fileID: 22100000, guid: 668999384d64b434b9f3540362960939, type: 2}
-  CHA_animOverride: {fileID: 22100000, guid: 1f53d90550a330448b17e1786df33449, type: 2}
-  DEX_animOverride: {fileID: 22100000, guid: e5710eee88e38a6448d263639c241efe, type: 2}
-  INT_animOverride: {fileID: 22100000, guid: 4d1359fc2dbabe740a21ff68dea8eb88, type: 2}
-  CON_animOverride: {fileID: 22100000, guid: 56913cd367eb1cd45b848ae8123be725, type: 2}
+  PlayerMovement: {fileID: 0}
+  STR_animOverride: {fileID: 22100000, guid: ed87a4d231a06b94c9cb36b54bf74f89, type: 2}
+  CHA_animOverride: {fileID: 22100000, guid: 1131424a56a53f248a67261fb83988fd, type: 2}
+  DEX_animOverride: {fileID: 22100000, guid: a6fe7f12a97b54f4eb75b802c03144f5, type: 2}
+  INT_animOverride: {fileID: 22100000, guid: bcb3bfb1187b598419e278d58863bb77, type: 2}
+  CON_animOverride: {fileID: 22100000, guid: dbcf227523d6f894c8116c72c58d3040, type: 2}
   Input: {fileID: 5560827838607957593}
   currAction: 0
   health: 0
@@ -2805,7 +2806,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3659271061219553358}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5560827838607957593
 MonoBehaviour:

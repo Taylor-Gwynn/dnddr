@@ -18,18 +18,31 @@ public enum ObstacleID
     Ballista
 }
 
-public enum PlayerSuccessAnimations
+// different input timings / scores
+public enum Judgement
 {
-    Attack,
-    Kiss,
-    Hug,
-    Jump
+    miss,
+    bad,
+    goodEarly,
+    goodLate,
+    greatEarly,
+    greatLate,
+    perfectEarly,
+    perfectLate
 }
 
-public enum PlayerFailAnimations
-{
-    SwingAndMiss,
-    RejectedKiss,
-    RejectedHug,
-    Trip
-}
+// public enum PlayerSuccessAnimations
+// {
+//     Attack,
+//     Kiss,
+//     Hug,
+//     Jump
+// }
+
+// public enum PlayerFailAnimations
+// {
+//     SwingAndMiss,
+//     RejectedKiss,
+//     RejectedHug,
+//     Trip
+// }
