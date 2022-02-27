@@ -148,7 +148,7 @@ MonoBehaviour:
   _DecayRate: 0.01
   _StandardHpReduction: 0.1
   _StandardHpIncrease: 0.25
-  _VisualTransitionSmoothing: 1
+  _VisualTransitionSmoothing: 3
   _CurrentHealth: 1
 --- !u!1 &302946140047513916
 GameObject:
@@ -3367,7 +3367,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5069859779099261276
 Transform:
   m_ObjectHideFlags: 0
@@ -3376,7 +3376,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7598156579653304175}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.21, y: 1.06, z: 1.59}
+  m_LocalPosition: {x: 0.98, y: 1.46, z: 1.59}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4373350688154081044}
