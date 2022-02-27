@@ -1325,7 +1325,7 @@ MonoBehaviour:
     m_Bits: 64
   _Origin: {fileID: 1769271528}
   _OriginOffset: {x: -15, y: 0, z: 0}
-  _SpawnRange: {x: 5, y: 0, z: 30}
+  _SpawnRange: {x: 5, y: 0, z: 15}
   _RefreshDistance: 30
   _SafetyRange: 15
   _CleanUpDistance: 80
