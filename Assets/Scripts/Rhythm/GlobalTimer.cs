@@ -13,11 +13,13 @@ public class GlobalTimer : MonoBehaviour
     private int bar;                    // The bar we're current in (starting at 1)
     private float beatTimer;            // Time until the next beat
     private AudioSource au;
+    private AudioSource mu;
 
     // Start is called before the first frame update
     void Start()
     {
         au = GetComponent<AudioSource>();
+        mu = GetComponentInChildren<AudioSource>();
         beatTimer = beatTimerDefault;
         beat = 1;
         bar = 1;
@@ -75,6 +77,9 @@ public class GlobalTimer : MonoBehaviour
         // Debug.Log("Bar:  " + bar);
         foreach (BeatMover x in listeners){
             x.OnBar();
+        }
+        if (!mu.isPlaying && Time.timeSinceLevelLoad > 1f){
+            mu.Play();
         }
     }
 
