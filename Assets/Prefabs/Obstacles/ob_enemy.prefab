@@ -1044,6 +1044,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Type: {fileID: 11400000, guid: 22252b6e2a008ae41bc3842ad0aa409f, type: 2}
+  _isSupposedToPass: 1
 --- !u!95 &9099300814118357949
 Animator:
   serializedVersion: 3
@@ -1579,7 +1580,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7c7c25a877153bd4e92cced46c5fdd60, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
