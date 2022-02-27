@@ -84,6 +84,9 @@ ModelImporter:
   - first:
       74: -7203446484170734029
     second: dwarfSkel|dwarf_examine_windup
+  - first:
+      74: 4957347910348705372
+    second: dwarfSkel|test_moveObjForward
   externalObjects: {}
   materials:
     materialImportMode: 2
