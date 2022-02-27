@@ -153,7 +153,7 @@ public class Player : BeatMover
         //     this.transform.position = anchorSpot; //snap position back to where the beat was
         // }
         Judgement judgement;
-        if (Math.Abs(timing) > 0.4 || isMatch != obstacle._IsSupposedToPass){ //too far out (or wrong)
+        if (isMatch != obstacle._IsSupposedToPass){ //too far out (or wrong)
             judgement = Judgement.miss;
             soundulon.clip = wrongNoise;
         }else if(timing < 0){   //earlies
