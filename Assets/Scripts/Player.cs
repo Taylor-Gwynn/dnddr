@@ -100,6 +100,7 @@ public class Player : BeatMover
         if (!ValidActionTime())
         {
             currAction = ChoiceType.None;
+            HPManager.ReduceHealth(.25f);
             // Subtract score
             // Play fail sound/animation
 
@@ -110,12 +111,15 @@ public class Player : BeatMover
         bool isMatch = false;
         int points = 0;
         //getting info from obstacle
-        Bim.ObstacleType obstacleType = obstaclePath.GetCurrObstacle().GetObstacleType();
         Bim.Obstacle obstacle = obstaclePath.GetCurrObstacle();
+        Bim.ObstacleType obstacleType = obstacle.GetObstacleType();
+        
         if (obstacleType == null){Debug.Log("Did not pull an obstacle from ObstaclePath!");}
+        
         //checking if it's right
         isMatch = obstacleType._ChoiceType == choice;
         obstacle.Interact(isMatch);
+        
         //setting animators in motion
         animator.SetBool("successParam", isMatch);
         animator.SetTrigger("WindupInteraction");
@@ -135,7 +139,7 @@ public class Player : BeatMover
         //     this.transform.position = anchorSpot; //snap position back to where the beat was
         // }
         Judgement judgement;
-        if (Math.Abs(timing) > 0.4 || isMatch != obstacle._isSupposedToPass){ //too far out (or wrong)
+        if (Math.Abs(timing) > 0.4 || isMatch != obstacle._IsSupposedToPass){ //too far out (or wrong)
             judgement = Judgement.miss;
         }else if(timing < 0){   //earlies
             if (Math.Abs(timing) > .35){
@@ -165,10 +169,13 @@ public class Player : BeatMover
 
         if (points < 0)
         {
-            HPManager.ReduceHealth(0.2f);
+            HPManager.ReduceHealth(0.1f);
         }
-        
-        UpdateHealth(judgement);
+        else
+        {
+            HPManager.AddHealth(.25f);
+        }
+
         UpdateScoreUI();
 
         return isMatch;
@@ -184,11 +191,6 @@ public class Player : BeatMover
         return (currentBeat >= validActionStart & currentBeat <= validActionEnd) 
                 | (validActionEnd > timer.TIME_SIGNATURE & currentBeat < validActionEnd - timer.TIME_SIGNATURE)
                 && obstaclePath.GetInRange(this.transform);
-    }
-
-    //damages or increases health based on score and combo(?)
-    private void UpdateHealth(Judgement judge){
-        // throw new NotImplementedException();
     }
 
     //draws current score on HUD
@@ -269,7 +271,8 @@ public class Player : BeatMover
         }
 
         //start action if winding up?
-        if (currAction != ChoiceType.None){//should be set by StartChoice()
+        if (currAction != ChoiceType.None){
+            //should be set by StartChoice()
             isDoingAction = true;
             Debug.Log("OnBar: beginningAction!");
             animator.SetTrigger("BeginningAction");

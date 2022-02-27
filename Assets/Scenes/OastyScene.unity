@@ -504,7 +504,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Type: {fileID: 0}
-  _isSupposedToPass: 1
+  _Die: {fileID: 0}
+  _IsSupposedToPass: 1
 --- !u!1 &479473554
 GameObject:
   m_ObjectHideFlags: 0
@@ -1362,7 +1363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _SetPieces: {fileID: 1562026474}
-  _Density: 3
+  _Density: 5
   _AvoidanceMask:
     serializedVersion: 2
     m_Bits: 64
