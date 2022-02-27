@@ -8,6 +8,8 @@ using Random = UnityEngine.Random;
 public class Dice_Roller : MonoBehaviour
 {
     public TextMeshPro _diceText;
+    public SkinnedMeshRenderer _Mesh;
+    public Animator _Animator;
     
     public float _rollTime;
     public float _rollSpeed;
@@ -18,35 +20,9 @@ public class Dice_Roller : MonoBehaviour
     private float rollStartTime;
     private bool rollStarted = false;
     private SkinnedMeshRenderer mesh;
-    private Animator animator;
+    
     
     private void Start() {
-        mesh = GetComponentInChildren<SkinnedMeshRenderer>();
-        animator = GetComponent<Animator>();
-    }
-    void Update()
-    {
-        if (rollStarted)
-        {
-            Roll();
-        }
-    }
-
-    void Roll()
-    {
-        if (Time.time >= rollStartTime + _rollTime)
-        {
-            result = Random.Range(1, 21);
-            displayNum = result;
-            SetNumOnMaterial(result);
-            animator.SetTrigger("roll");
-            rollStarted = false;
-        }
-        else if (Time.time - lastRollTime >= _rollSpeed)
-        {
-            displayNum = Random.Range(1, 21);
-            lastRollTime = Time.time;
-        }
     }
     
     public int GetResult()
@@ -70,11 +46,15 @@ public class Dice_Roller : MonoBehaviour
 
     public void SetNumOnMaterial(int dieNumber){
         float offset = NumToUVOffset(dieNumber);
-        mesh.material.SetTextureOffset("_MainTex", new Vector2(0, offset));
+        _Mesh.material.SetTextureOffset("_MainTex", new Vector2(0, offset));
     }
 
     public void RollDie()
     {
-        rollStarted = true;
+        result = Random.Range(1, 21);
+        displayNum = result;
+        SetNumOnMaterial(result);
+        _Animator.SetTrigger("roll");
+        rollStarted = false;
     }
 }

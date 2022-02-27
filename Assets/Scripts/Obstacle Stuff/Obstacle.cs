@@ -79,7 +79,8 @@ namespace Bim
             if (other.gameObject.layer != 7) return;
             _Die.gameObject.SetActive(true);
             _Die.RollDie();
-            _IsSupposedToPass = _Die.GetResult() < _SuccessRoll;
+            Debug.LogError(_Die.GetResult());
+            _IsSupposedToPass = _Die.GetResult() >= _SuccessRoll;
         }
     }
 }
