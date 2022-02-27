@@ -13,8 +13,8 @@ public class FloorManager : MonoBehaviour
     private float spawnY;
     private float spawnZ = 0.0f;
     private float tileLength = 2f;
-    private int numTilesOnScreen = 20;
-    private float safeZone = 15f;
+    private int numTilesOnScreen = 60;
+    private float safeZone = 30f;
 
     private List<GameObject> activeTiles;
     
@@ -25,7 +25,7 @@ public class FloorManager : MonoBehaviour
         // Starting position of the tiles
         spawnX = playerTransform.position.x;
         spawnY = playerTransform.position.y - 0.1f;
-        spawnZ = playerTransform.position.z - tileLength * 7;
+        spawnZ = playerTransform.position.z - tileLength * safeZone;
         
         // Spawn Starting tiles
         for (int i = 0; i < numTilesOnScreen; i++)

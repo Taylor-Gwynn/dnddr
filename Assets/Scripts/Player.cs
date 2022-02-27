@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Player_Stuff;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 // The class that implements player score, health and animation controllers,
 //      initiates inputs and health/scoring calculations.
@@ -91,9 +92,15 @@ public class Player : BeatMover
         if (HPManager._CurrentHealth <= 0)
         {
             GameOverText.SetActive(true);
-            Time.timeScale = 0;
+            StartCoroutine(Waiter());
         }
         
+    }
+
+    IEnumerator Waiter()
+    {
+        yield return new WaitForSecondsRealtime(3);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
     // called immediately when player inputs a move (returns true iff it was correct choice)
