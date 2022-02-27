@@ -221,9 +221,9 @@ public class Player : BeatMover
         soundulon.Play();
         switch (judgement){
             case Judgement.miss:
-                return -3;
+                return 0;
             case Judgement.bad:
-                return -5;
+                return 1;
             case Judgement.goodEarly:
             case Judgement.goodLate:
                 return 3;
