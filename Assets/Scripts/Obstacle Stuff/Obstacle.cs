@@ -66,7 +66,7 @@ namespace Bim
 
         //called by player, initiates interaction and sets off obstacle's  animations
         public void Interact(bool isMatch){
-            animator.SetBool("successParam", isMatch == _IsSupposedToPass);
+            animator.SetBool("successParam", isMatch);
 
             animator.SetTrigger("WindupInteraction");
             animator.SetTrigger("BeginningAction");
